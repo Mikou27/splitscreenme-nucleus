@@ -31,7 +31,7 @@ namespace Nucleus.Coop.Controls
             Size = new Size(size.Width, size.Height);
             Location = location;
             Image = UI_Interface.ShowFavoriteOnly ? favorite_Selected : favorite_Unselected;
-            CustomToolTips.SetToolTip(this, "Show favorite games only.", this.GetType().ToString(), new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(this, Localization.GetLocalizedText(33), this.GetType().ToString(), new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
             Click += FavoriteOnly_Click;
             Click += Generic_Functions.ClickAnyControl;

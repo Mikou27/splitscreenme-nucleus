@@ -143,8 +143,8 @@ namespace Nucleus.Coop.UI
                     UI_Interface.ProfilesList.Visible = showList;
                 }
 
-                CustomToolTips.SetToolTip(UI_Interface.ProfileListButton, $"{currentGame.GameName} profiles list.", "profilesList_btn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-                CustomToolTips.SetToolTip(UI_Interface.ProfileSettingsButton, $"Profile settings.", "profileSettings_btn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(UI_Interface.ProfileListButton, $"{Localization.GetLocalizedText(34).Split('|')[0]}{currentGame.GameName}{Localization.GetLocalizedText(34).Split('|')[1]}", "profilesList_btn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(UI_Interface.ProfileSettingsButton, Localization.GetLocalizedText(35), "profileSettings_btn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
                 UI_Interface.ProfileListButton.Visible = showList;
                 UI_Functions.SetGameProfileButtonLoc();
@@ -166,7 +166,7 @@ namespace Nucleus.Coop.UI
                 UI_Interface.HandlerNotes.ResetText();
                 UI_Interface.HandlerNotes.Text = currentGame.Description;
                
-                HighlightNotesText.Highlight(UI_Interface.HandlerNotes);
+                //HighlightNotesText.Highlight(UI_Interface.HandlerNotes);
 
                 UI_Interface.HandlerNotesContainer.Visible = true;
 
@@ -228,7 +228,7 @@ namespace Nucleus.Coop.UI
                     UI_Interface.SaveProfileSwitch.Location = new Point(UI_Interface.ProfileSettingsButton.Right + 5, UI_Interface.SaveProfileSwitch.Location.Y);
                     UI_Interface.ProfileSettingsButton.Visible = true;
 
-                    CustomToolTips.SetToolTip(UI_Interface.ProfileSettingsButton, $"{Core_Interface.Current_GenericGameInfo.GameName} profiles list.", "profilesList_btn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                    CustomToolTips.SetToolTip(UI_Interface.ProfileSettingsButton, $"{Localization.GetLocalizedText(34).Split('|')[0]}{Core_Interface.Current_GenericGameInfo.GameName}{Localization.GetLocalizedText(34).Split('|')[1]}", "profilesList_btn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
                     if (Core_Interface.StepsList != null)
                     {

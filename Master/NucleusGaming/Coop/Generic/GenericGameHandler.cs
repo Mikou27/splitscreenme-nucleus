@@ -102,8 +102,10 @@ namespace Nucleus.Gaming
         public GameProfile profile;
         private GenericGameInfo gen;
         public GenericGameInfo CurrentGameInfo => gen;
-        public GenericContext context;
-        
+
+        private GenericContext context;
+        public GenericContext Context => context;
+
         private UserGameInfo userGame;
         public ProcessData prevProcessData;
         public Process launchProc;
@@ -269,7 +271,10 @@ namespace Nucleus.Gaming
 
             if (gen.NeedSteamClient)
             {
-                SteamFunctions.StartSteamClient();
+                while(!SteamFunctions.StartSteamClient())
+                {
+                    Thread.Sleep(1000);
+                }
             }
 
             TaskbarState.Hide.Invoke();
@@ -297,19 +302,20 @@ namespace Nucleus.Gaming
             }
 
             if (isDebug)
-            {
-                Log("--------------------- START ---------------------");
-                Log($"-Install location: {Globals.NucleusInstallRoot}");
+            {       
+                Log($"-Nucleus Version: {Globals.Version}");
+                Log($"-Nucleus install location: {Globals.NucleusInstallRoot}");
+                Log($"-Original game executable location: {userGame.ExePath}");
                 if (Globals.IsOneDriveEnabled)
                 {
                     Log($@"/!\  USER DOCUMENTS PATH IS IN ONEDRIVE  /!\  -> {Globals.UserDocumentsRoot} ");
                 }   
-                
-                Log($"-Version: {Globals.Version}");
-                
+
                 MachineSpecs.GetPCspecs();
                 Log(string.Format("-Game: {0}, Arch: {1}, Executable: {2}, Launcher: {3}, SteamID: {4}, Handler: {5}, Content Folder: {6}", gen.GameName, garch, gen.ExecutableName, gen.LauncherExe, gen.SteamID, gen.JsFileName, gen.GUID));
                 Log(string.Format("-Number of players: {0}", profile.DevicesList.Count) + "\n");
+
+                Log("--------------------- START ---------------------");
             }
 
             ProcessUtil.KillRemainingProcess();
@@ -1845,7 +1851,7 @@ namespace Nucleus.Gaming
                             {
                                 string scriptPath = Path.GetTempFileName().Replace(".tmp", ".cmd");
                                 StringBuilder scriptContent = new StringBuilder();
-                                string test = Globals.UserEnvironmentRoot.Replace("koumi", "Mickàél");
+                                //string test = Globals.UserEnvironmentRoot.Replace("koumi", "Mickàél");
 
                                 string[] cmdOps = gen.CMDOptions;
 
@@ -3413,6 +3419,12 @@ namespace Nucleus.Gaming
                 {
                     try
                     {
+                        if(!runtimeForm.IsHandleCreated)
+                        {
+                            runtimeForm.Dispose();
+                            continue;
+                        }
+
                         runtimeForm?.Invoke(new Action(() =>
                         {
                             runtimeForm?.Close();

@@ -194,7 +194,8 @@ public static class DInputManager
         {
             if (App_Misc.VGMOnly)
             {
-                if (!player.DInputJoystick.VendorId.StartsWith("202"))
+                if (/*!player.DInputJoystick.VendorId.ToString().StartsWith("202") || */(!player.DInputJoystick.VendorId.ToString().StartsWith("202") && player.DInputJoystick.VendorId.ToString() != ("1356")))
+                    //if (!player.DInputJoystick.VendorId.StartsWith("202") && player.DInputJoystick.VendorId.ToString() != ("1356"))//"1356" == dualshock4 (Sony vid)                  
                 {
                    return false;
                 }

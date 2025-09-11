@@ -239,7 +239,7 @@ namespace Nucleus.Coop.Controls
                     Cursor = Theme_Settings.Hand_Cursor
                 };
 
-                CustomToolTips.SetToolTip(deleteBtn, $"Delete handler profile {i + 1}.", $"Delete profile{i}.", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(deleteBtn, $"{Localization.GetLocalizedText(17)} {i + 1}.", $"Delete profile{i}.", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 deleteBtn.Click += DeleteBtn_Click;//Delete profile
 
                 offset += deleteBtn.Width;
@@ -258,7 +258,7 @@ namespace Nucleus.Coop.Controls
                     Cursor = Theme_Settings.Hand_Cursor
                 };
 
-                CustomToolTips.SetToolTip(previewBtn, "Show handler profile info .", $"previewBtn{i}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(previewBtn, Localization.GetLocalizedText(18), $"previewBtn{i}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 previewBtn.Click += Profile_Preview;//view profile event 
 
                 offset += previewBtn.Width;
@@ -277,7 +277,7 @@ namespace Nucleus.Coop.Controls
                     Cursor = Theme_Settings.Hand_Cursor
                 };
 
-                string profileBtnToolTipText = File.Exists(Application.StartupPath + "\\Profiles Launcher.exe") ? $"Load handler profile {profileBtn.Name}. Right click to export a shortcut to desktop." : $"Load handler profile {profileBtn.Name}.";
+                string profileBtnToolTipText = File.Exists(Application.StartupPath + "\\Profiles Launcher.exe") ? $"{Localization.GetLocalizedText(19).Split('|')[0]}{profileBtn.Name}{Localization.GetLocalizedText(19).Split('|')[1]}" : $"{Localization.GetLocalizedText(19).Split('|')[0]}{profileBtn.Name}.";
 
                 profileBtn.MouseClick += ProfileBtn_CheckedChanged;
 
@@ -289,12 +289,12 @@ namespace Nucleus.Coop.Controls
                     profileBtn.Controls.Add(deleteBtn);
                     profileBtn.Controls.Add(previewBtn);
 
-                    CustomToolTips.SetToolTip(profileBtn, profileBtnToolTipText, $"profileBtnToolTipText${i}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                    CustomToolTips.SetToolTip(profileBtn, profileBtnToolTipText, $"{profileBtnToolTipText} {i}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 }
                 else
                 {
                     profileBtn.ForeColor = Color.Gray;
-                    CustomToolTips.SetToolTip(profileBtn, "Unload current loaded handler profile.", $"Unload profile", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                    CustomToolTips.SetToolTip(profileBtn, Localization.GetLocalizedText(20), $"Unload profile", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 }
 
                 using (Graphics graphics = Graphics.FromImage(new Bitmap(1, 1)))

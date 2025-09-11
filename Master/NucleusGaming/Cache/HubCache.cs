@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -17,7 +18,7 @@ namespace Nucleus.Gaming.Cache
     {
         private static string cacheFile = Path.Combine(Application.StartupPath, $"webview\\cache\\hubcache");
         private static string thumbnailFolder = Path.Combine(Application.StartupPath, $"webview\\cache\\thumbnails\\");
-        private const string api = "https://hub.splitscreen.me/api/v1/";
+        private const string api = "http://localhost:3000/api/v1/";
 
         private static JObject cacheObject;
         private static JArray handlersArray;
@@ -142,6 +143,8 @@ namespace Nucleus.Gaming.Cache
                         CurrentPackage = handlersArray[i]["currentPackage"].ToString(),
                     };
 
+                    handler.GameGenres = (handlersArray[i]["gameGenres"] as JArray)?.Select(g => (string)g).ToList() ?? new List<string>();
+
                     return handler;
                 }
             }
@@ -160,7 +163,7 @@ namespace Nucleus.Gaming.Cache
 
             string hubResp = Get(uri);
 
-            if (hubResp == null || hubResp == "{}")
+            if (hubResp == null || hubResp == "{}" || hubResp.StartsWith("<!DOCTYPE html>"))
             {
                 return null;
             }
@@ -200,6 +203,8 @@ namespace Nucleus.Gaming.Cache
                             CurrentVersion = searchHandlers[i]["currentVersion"].ToString(),
                             CurrentPackage = searchHandlers[i]["currentPackage"].ToString(),
                         };
+
+                        handler.GameGenres = (handlersArray[i]["gameGenres"] as JArray)?.Select(g => (string)g).ToList() ?? new List<string>();
                     }
                 }
 
@@ -229,7 +234,7 @@ namespace Nucleus.Gaming.Cache
             List<Handler> handlers = new List<Handler>();
 
             for (int i = 0; i < handlersArray.Count; i++)
-            {
+            {              
                 Handler handler = new Handler
                 {
                     Id = handlersArray[i]["_id"].ToString(),
@@ -253,19 +258,23 @@ namespace Nucleus.Gaming.Cache
                     CurrentPackage = handlersArray[i]["currentPackage"].ToString(),
                 };
 
+                List<string> genres = new List<string>();
+                if (handlersArray[i]["gameGenres"] != null)
+                {
+                    JToken jGenres = handlersArray[i]["gameGenres"] as JToken;
+                    for (int s = 0; s < jGenres.Count(); s++)
+                    {
+                        genres.Add(jGenres[s].ToString());
+                    }
+                }
+
+                handler.GameGenres = genres;
+
                 handlers.Add(handler);
             }
 
             return handlers;
-        }
-
-        public static string GetScreenshotsUri(string id)
-        {
-            if (id == null) { return null; }
-            if (id == "{}" || id == "") { return null; }
-            string resp = Get($@"https://hub.splitscreen.me/api/v1/screenshots/{id}");
-            return resp;
-        }
+        }        
 
         public static JArray SearchByName(string searchParam)
         {

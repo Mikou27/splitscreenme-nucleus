@@ -28,6 +28,9 @@ namespace Nucleus.Gaming.Coop.InputManagement
         private static bool[] _chkPassThrough = new bool[] { false, false, false};
         public static bool[] ChkPassThrough => _chkPassThrough;
 
+        private static string[] customHotKeyDisplayText = new string[] { "", "", "" };
+        public static string[] CustomHotKeyDisplayText => customHotKeyDisplayText;
+
         private static int GetMod(string modifier)
         {
             int mod = 0;
@@ -89,7 +92,7 @@ namespace Nucleus.Gaming.Coop.InputManagement
                 MessageBox.Show("Error unregistering hotkeys " + ex.Message, ex.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+     
         public static void RegCustomHotkeys(GenericGameInfo _currentGameInfo)
         {
             currentGameInfo = _currentGameInfo;
@@ -106,15 +109,18 @@ namespace Nucleus.Gaming.Coop.InputManagement
                         {
                             case 0:
                                 _chkPassThrough[0] = bool.Parse(keys[0]);
-                                User32Interop.RegisterHotKey(formHandle, Custom_Hotkey_1, GetMod(keys[1]), (int)Enum.Parse(typeof(Keys), keys[2]));
+                                customHotKeyDisplayText[0] = keys[1];
+                                User32Interop.RegisterHotKey(formHandle, Custom_Hotkey_1, GetMod(keys[2]), (int)Enum.Parse(typeof(Keys), keys[3]));
                                 break;
                             case 1:
                                 _chkPassThrough[1] = bool.Parse(keys[0]);
-                                User32Interop.RegisterHotKey(formHandle, Custom_Hotkey_2, GetMod(keys[1]), (int)Enum.Parse(typeof(Keys), keys[2]));
+                                customHotKeyDisplayText[1] = keys[1];
+                                User32Interop.RegisterHotKey(formHandle, Custom_Hotkey_2, GetMod(keys[2]), (int)Enum.Parse(typeof(Keys), keys[3]));
                                 break;
                             case 2:
                                 _chkPassThrough[2] = bool.Parse(keys[0]);
-                                User32Interop.RegisterHotKey(formHandle, Custom_Hotkey_3, GetMod(keys[1]), (int)Enum.Parse(typeof(Keys), keys[2]));
+                                customHotKeyDisplayText[2] = keys[1];
+                                User32Interop.RegisterHotKey(formHandle, Custom_Hotkey_3, GetMod(keys[2]), (int)Enum.Parse(typeof(Keys), keys[3]));
                                 break;
                         }
 

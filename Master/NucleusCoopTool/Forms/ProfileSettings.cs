@@ -427,21 +427,15 @@ namespace Nucleus.Coop
 
         private void SetToolTips()
         {
-            CustomToolTips.SetToolTip(autoPlay, "Automatically launch game instances on profile selection.", "autoPlay_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(WindowsSetupTiming_TextBox, "Speedup windows resizing and positioning (1000ms is fine in most cases).\n" +
-                                                                  "Could break hooks or xinputplus for some games.", "WindowsSetupTiming_TextBox_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(pauseBetweenInstanceLaunch_TxtBox, "Time to wait before starting the next game instance.\n" +
-                                                                         "Could break positioning/resizing for some games.", "pauseBetweenInstanceLaunch_TxtBox_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(splitDiv, "May not work for all games.", "splitDiv_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(hideDesktop, "Will only show the splitscreen division window without adjusting the game windows size and offset.", "hideDesktop_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(refreshScreenDatasButton, "Refresh screens info.", "refreshScreenDatasButton_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(enable_WMerger, "Game windows will be merged to a single window\n" +
-                                                           "so upscaling tools such as Lossless Scaling\n" +
-                                                           "can be used with Nucleus. Note that there's no multiple monitor support yet.", "enable_WMerger_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(autoPlay, Localization.GetLocalizedText(8), "autoPlay_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(WindowsSetupTiming_TextBox, Localization.GetLocalizedText(9), "WindowsSetupTiming_TextBox_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(pauseBetweenInstanceLaunch_TxtBox, Localization.GetLocalizedText(10), "pauseBetweenInstanceLaunch_TxtBox_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(splitDiv, Localization.GetLocalizedText(11), "splitDiv_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(hideDesktop, Localization.GetLocalizedText(12), "hideDesktop_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(refreshScreenDatasButton, Localization.GetLocalizedText(13), "refreshScreenDatasButton_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(enable_WMerger, Localization.GetLocalizedText(14), "enable_WMerger_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
-            CustomToolTips.SetToolTip(losslessHook, "Lossless will not stop upscaling if an other window get the focus, useful\n" +
-                                                    "if game windows requires real focus to receive inputs.", "losslessHook_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(refreshScreenDatasButton, "Refresh screens info.", "refreshScreenDatasButton_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(losslessHook, Localization.GetLocalizedText(15), "losslessHook_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
         }
 
         private void GetPlayersNickNameAndIds()
@@ -1406,7 +1400,7 @@ namespace Nucleus.Coop
                 resLabel.Text = $"⛶ {cleanName}";
                 resLabel.Cursor = Theme_Settings.Hand_Cursor;
 
-                CustomToolTips.SetToolTip(resLabel, "Click here to identify the screen", "resLabel_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(resLabel, Localization.GetLocalizedText(16), "resLabel_PRST", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
                 if (screensLabels.Count == 0)
                 {

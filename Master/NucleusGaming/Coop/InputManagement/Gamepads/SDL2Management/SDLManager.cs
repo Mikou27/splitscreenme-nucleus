@@ -8,6 +8,9 @@ using Nucleus.Gaming.Controls.SetupScreen;
 using Nucleus.Gaming.Coop.InputManagement.Gamepads;
 using Nucleus.Gaming.Coop;
 using Nucleus.Gaming.App.Settings;
+using System.Reflection;
+using System.Security.Cryptography;
+using SharpDX.DirectInput;
 
 namespace Gamepads
 {
@@ -76,7 +79,7 @@ namespace Gamepads
 
             SDL2.Quit();
             SDL_INITIALIZED = false;
-            Thread.Sleep(1000);
+            Thread.Sleep(1500);
 
             SDL2.InitSubSystem(InitFlags.Video);
             SDL2.InitSubSystem(InitFlags.GameController);
@@ -92,6 +95,12 @@ namespace Gamepads
             for (int i = 0; i < deviceCount; i++)
             {
                 SDL_GameController controller = SDL2.GameControllerOpen(i);
+
+                if(controller == IntPtr.Zero)
+                {
+                    continue;
+                }
+
                 SDL2DevicesList.Add(controller);        
                 
                 if(logDeviceInfo)
@@ -122,9 +131,12 @@ namespace Gamepads
 
                 if (_event.Type == EventType.ControllerDeviceAdded)
                 {
-                    if (_event.CDevice.Which > SDL2DevicesList.Count - 1 && !SDL2.JoystickGetDeviceVendor(_event.CDevice.Which).ToString().StartsWith(Virtual_VendorID.ToString()))
+                    //if ((_event.CDevice.Which > SDL2DevicesList.Count - 1 && !SDL2.JoystickGetDeviceVendor(_event.CDevice.Which).ToString().StartsWith(Virtual_VendorID.ToString()) && !App_Misc.VGMOnly) ||
+                    //    (_event.CDevice.Which > SDL2DevicesList.Count - 1 && SDL2.JoystickGetDeviceVendor(_event.CDevice.Which).ToString().StartsWith(Virtual_VendorID.ToString()) && App_Misc.VGMOnly))
+                    if (_event.CDevice.Which > SDL2DevicesList.Count - 1 /*&& !SDL2.JoystickGetDeviceVendor(_event.CDevice.Which).ToString().StartsWith(Virtual_VendorID.ToString())*/)
                     {
                         Refresh_SDL_CallBack(syncContext);
+                        //AddNewSDLDevice(_event.CDevice.Which);
                         return;
                     }
                 }
@@ -144,11 +156,11 @@ namespace Gamepads
 
         #region ADD/REMOVE SDL DEVICES FUNCTIONS
 
-        private static void AddNewSDLDevice()
+        private static void AddNewSDLDevice(int index)
         {
             int lastEntry = SDL2DevicesList.Count;
 
-            SDL_GameController controller = SDL2.GameControllerOpen(lastEntry);
+            SDL_GameController controller = SDL2.GameControllerOpen(index);
 
             if (controller != IntPtr.Zero)
             {
@@ -269,7 +281,8 @@ namespace Gamepads
 
                         if (App_Misc.VGMOnly)
                         {
-                            if (!joystick.VendorId.StartsWith("202"))
+                            if (/*!joystick.VendorId.ToString().StartsWith("202") || */(!joystick.VendorId.ToString().StartsWith("202") && joystick.VendorId.ToString() != ("1356")))//"1356" == dualshock4 (Sony vid)
+                              //  if (!joystick.VendorId.ToString().StartsWith("202") && joystick.VendorId.ToString() != ("1356"))//"1356" == dualshock4 (Sony vid)
                             {
                                 continue;
                             }

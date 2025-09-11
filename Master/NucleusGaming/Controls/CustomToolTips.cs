@@ -1,6 +1,4 @@
-﻿using Nucleus.Coop;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -42,7 +40,6 @@ namespace Nucleus.Gaming.Controls
             tooltipList.TryAdd(id, tooltip);
         }
 
-
         public static CustomToolTip GetControlToolTip(string toolTipName)
         {
            return tooltipList.TryGetValue(toolTipName, out CustomToolTip tooltip) ? tooltip : null;
@@ -51,27 +48,10 @@ namespace Nucleus.Gaming.Controls
         private static void Tooltip_Draw(object sender, DrawToolTipEventArgs e)
         {
             CustomToolTip tooltip = sender as CustomToolTip;
-
             e.DrawBackground();
             e.DrawBorder();
             SolidBrush brush = new SolidBrush(tooltip.ForeColor);
             e.Graphics.DrawString(e.ToolTipText, e.Font, brush, 2, 2);
-
-            //if (e.AssociatedControl.GetType() == typeof(GameControl))
-            //{
-            //    foreach (KeyValuePair<Control, ToolTip> t in tooltipList)
-            //    {
-            //        if (t.Key.GetType() == typeof(GameControl))
-            //        {
-            //            t.Value.InitialDelay += 200;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    tooltip.InitialDelay += 100;
-            //}
-
             brush.Dispose();
         }
 

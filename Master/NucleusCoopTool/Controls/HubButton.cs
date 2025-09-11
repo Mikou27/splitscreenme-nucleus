@@ -103,9 +103,9 @@ namespace Nucleus.Coop.Controls
             btn_AddGameLabel.Text = connected ? "Add New Games" : "Offline";
             btn_AddGamePb.BackgroundImage = connected ? ImageCache.GetImage(Globals.ThemeFolder + "add_game.png") : ImageCache.GetImage(Globals.ThemeFolder + "title_no_hub.png");
 
-            CustomToolTips.SetToolTip(this, connected ? "Install new game handlers." : OfflineToolTipText(), "btn_AddGame", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(btn_AddGamePb, connected ? "Install new game handlers." : OfflineToolTipText(), "btn_AddGamePb", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(btn_AddGameLabel, connected ? "Install new game handlers." : OfflineToolTipText(), "btn_AddGameLabel", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(this, connected ? Localization.GetLocalizedText(2) : Localization.GetLocalizedText(3), "btn_AddGame", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(btn_AddGamePb, connected ? Localization.GetLocalizedText(2) : Localization.GetLocalizedText(3), "btn_AddGamePb", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(btn_AddGameLabel, connected ? Localization.GetLocalizedText(2) : Localization.GetLocalizedText(3), "btn_AddGameLabel", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
             btn_AddGameLabel.Location = new Point(btn_AddGamePb.Right + 7, (btn_AddGamePb.Location.Y + btn_AddGamePb.Height / 2) - (btn_AddGameLabel.Height / 2));
         }
@@ -120,13 +120,6 @@ namespace Nucleus.Coop.Controls
         {
             btn_AddGamePb.Size = new Size(btn_AddGamePb.Width -= 3, btn_AddGamePb.Height -= 3);
             btn_AddGamePb.Location = new Point(btn_AddGamePb.Location.X + 1, btn_AddGamePb.Location.Y + 1);
-        }
-
-        private string OfflineToolTipText()
-        {
-            return "Nucleus can't reach hub.splitscreen.me." +
-                   "\nClick this button to refresh, if the " +
-                   "\nproblem persist, check our FAQ to learn more.";
         }
 
         private void RefreshNetStatus(object sender, EventArgs e)

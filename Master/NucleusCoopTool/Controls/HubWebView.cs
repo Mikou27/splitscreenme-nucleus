@@ -337,7 +337,7 @@ namespace Nucleus.Coop.Forms
 
         private void DownloadStarting(object sender, CoreWebView2DownloadStartingEventArgs e)
         {
-            if (!webView.CoreWebView2.Source.StartsWith("https://hub.splitscreen.me/"))
+            if (!webView.CoreWebView2.Source.StartsWith(hubUri))
             {
                 e.DownloadOperation.Cancel();
                 return;

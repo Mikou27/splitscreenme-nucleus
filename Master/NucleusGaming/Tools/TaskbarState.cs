@@ -30,8 +30,8 @@ namespace Nucleus.Gaming.Tools
                 userTaskbarAutoHide = protoInput.GetTaskbarAutohide();
                 GenericGameHandler.Instance.Ended += OnEndedCallback;
             }
-            
-            if (genericGameInfo.HideTaskbar && !GameProfile.UseSplitDiv && !userTaskbarAutoHide)
+
+            if (genericGameInfo.HideTaskbar  && !GameProfile.UseSplitDiv && !userTaskbarAutoHide )
             {
                 User32Util.HideTaskbar();
             }
@@ -55,7 +55,8 @@ namespace Nucleus.Gaming.Tools
                 return;
             }
 
-            if (genericGameInfo.HideTaskbar && !GameProfile.UseSplitDiv && !userTaskbarAutoHide)
+
+            if (genericGameInfo.HideTaskbar  && !GameProfile.UseSplitDiv  && !userTaskbarAutoHide )
             {
                 User32Util.ShowTaskBar();
             }

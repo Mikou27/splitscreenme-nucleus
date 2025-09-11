@@ -58,6 +58,11 @@ namespace SDL
       
         unsafe public static string GetString(byte* ptr)
         {
+            //if(ptr == null)
+            //{
+            //    return "";
+            //}
+
             int count = 0;
             while (*(ptr + count) != 0)
             {

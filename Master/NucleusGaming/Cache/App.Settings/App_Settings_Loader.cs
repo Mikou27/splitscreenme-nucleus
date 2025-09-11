@@ -19,6 +19,9 @@ namespace Nucleus.Gaming.App.Settings
                 App_GamePadNavigation.LoadSettings();
                 App_Layouts.LoadSettings();
                 App_Audio.LoadSettings();
+
+                Localization.LoadLocalization();//eventually move somewhere else
+                //Localization.ConsoleListLocalization();
             }
             catch(Exception ex)
             {

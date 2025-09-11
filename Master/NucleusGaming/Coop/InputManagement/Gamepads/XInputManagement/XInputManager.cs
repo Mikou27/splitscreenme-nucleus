@@ -34,7 +34,7 @@ namespace Nucleus.Gaming.Coop.InputManagement.Gamepads
                     CapabilitiesEx cap;
                     var _cap = OpenXinputController.XInputGetCapabilitiesEx((uint)1, (uint)player.GamepadId, 1, out cap);
 
-                    if (!cap.VendorId.ToString().StartsWith("202"))
+                    if (!cap.VendorId.ToString().StartsWith("202")/* || (!cap.VendorId.ToString().StartsWith("202") && cap.VendorId.ToString() != ("1356"))*/)
                     {
                         return false;
                     }

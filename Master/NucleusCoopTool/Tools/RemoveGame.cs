@@ -12,6 +12,8 @@ namespace Nucleus.Coop.Tools
 {
     internal class RemoveGame
     {
+        private static string scriptFolder = Gaming.GameManager.Instance.GetJsScriptsPath();
+
         public static void Remove(UserGameInfo currentGameInfo, bool dontConfirm)
         {
             GameManager gameManager = GameManager.Instance;
@@ -32,7 +34,8 @@ namespace Nucleus.Coop.Tools
                     if (gameGuid == currentGameInfo.GameGuid && exePath == currentGameInfo.ExePath)
                     {
                         DialogResult dialogResult = dontConfirm ? DialogResult.Yes :
-                            MessageBox.Show($"Are you sure you want to delete {currentGameInfo.Game.GameName}?", "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            MessageBox.Show($"Are you sure you want to delete {currentGameInfo.Game.GameName} from your Nucleus games library?", "Confirm deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        
                         if (dialogResult == DialogResult.Yes)
                         {
                             gameManager.User.Games.RemoveAt(i);
@@ -90,6 +93,52 @@ namespace Nucleus.Coop.Tools
 
                                 //    File.WriteAllLines(Path.Combine(Directory.GetCurrentDirectory() + "\\gui\\icons\\icons.ini"), newContent);
                                 //}
+                                string jsPath = Path.Combine(scriptFolder, currentGameInfo.Game.GameName + ".js");
+                                string jsPackagePath = Path.Combine(scriptFolder, currentGameInfo.Game.GameName);
+
+                                if (File.Exists(jsPath))
+                                {
+                                    DialogResult deleteResult = dontConfirm ? DialogResult.Yes :
+                                    MessageBox.Show($"Do you want to delete the {currentGameInfo.Game.GameName} handler too?", "Delete handler?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                                    if (deleteResult == DialogResult.Yes)
+                                    {
+                                        try
+                                        {
+                                            File.Delete(jsPath);
+                                        }
+                                        catch (Exception)
+                                        {}
+
+                                        try
+                                        {
+                                            if (Directory.Exists(jsPackagePath))
+                                            {
+                                                Directory.Delete(jsPackagePath, true);
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {}
+                                    }
+                                }
+
+                                string gameContentPath = Path.Combine(Application.StartupPath, $"content\\{currentGameInfo.Game.GameName}");
+
+                                if (Directory.Exists(gameContentPath))
+                                {
+                                    DialogResult deleteResult = dontConfirm ? DialogResult.Yes :
+                                    MessageBox.Show($"Do you want the \"content\" folder for {currentGameInfo.Game.GameName} too?", "Delete \"content\" folder?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                                    if (deleteResult == DialogResult.Yes)
+                                    {
+                                        try
+                                        {
+                                            Directory.Delete(gameContentPath, true);
+                                        }
+                                        catch (Exception)
+                                        { }
+                                    }
+                                }
 
                                 UI_Functions.RefreshUI(true);
                                 return;

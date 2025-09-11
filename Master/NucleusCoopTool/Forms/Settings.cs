@@ -528,26 +528,18 @@ namespace Nucleus.Coop
 
         private void SetToolTips()
         {
-            CustomToolTips.SetToolTip(splitDiv, "May not work for all games", "splitDiv", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(hideDesktop, "Will only show the splitscreen division window without adjusting the game windows size and offset.", "hideDesktop", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(disableGameProfiles, "Disables profiles, Nucleus will use the global settings instead.", "disableGameProfiles", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(gamepadsAssignMethods, "Some handlers doesn't support this option and will automatically disable it. If enabled, profiles\n" +
-                                                             "will not save the gamepads hardware ids but use API indexes instead\n" +
-                                                             "(switching modes could prevent some profiles to load properly).\n" +
-                                                             "Note: Nucleus will return to home screen.", "gamepadsAssignMethods" , new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(splitDiv, Localization.GetLocalizedText(22), "splitDiv", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(hideDesktop, Localization.GetLocalizedText(23), "hideDesktop", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(disableGameProfiles, Localization.GetLocalizedText(24), "disableGameProfiles", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(gamepadsAssignMethods, Localization.GetLocalizedText(25), "gamepadsAssignMethods" , new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
-            CustomToolTips.SetToolTip(assignGpdByBtnPress, "With this option enabled, the profile will assign gamepads based on button press,\n " +
-                                                           "rather than retrieving the previously assigned ones.\n" +
-                                                           "Note: Using this option alongside custom nicknames will streamline the setup process.", "assignGpdByBtnPress", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(assignGpdByBtnPress, Localization.GetLocalizedText(26), "assignGpdByBtnPress", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
            
-            CustomToolTips.SetToolTip(enable_WMerger, "Game windows will be merged to a single window\n" +
-                                                       "so Lossless Scaling can be used with Nucleus.\n " +
-                                                       "Note: Multiple monitor support is not yet available.", "enable_WMerger", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(enable_WMerger, Localization.GetLocalizedText(27), "enable_WMerger", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
-            CustomToolTips.SetToolTip(losslessHook, "Lossless will not stop upscaling if an other window get the focus, useful\n" +
-                                                    "if game windows requires real focus to receive inputs.", "losslessHook", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(refreshScreenDatasButton, "Refresh screens info.", "refreshScreenDatasButton", new int[] { 190, 0, 0, 0 },new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(mergerShortcutLabel, "Each press will set an other child window as foreground window(similar to Alt+Tab).", "mergerShortcutLabel", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(losslessHook, Localization.GetLocalizedText(28), "losslessHook", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(refreshScreenDatasButton, Localization.GetLocalizedText(29), "refreshScreenDatasButton", new int[] { 190, 0, 0, 0 },new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(mergerShortcutLabel, Localization.GetLocalizedText(30), "mergerShortcutLabel", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
         }
 
         private void GetPlayersNickNameAndSteamIds()
@@ -1293,7 +1285,7 @@ namespace Nucleus.Coop
                 string cleanName = screen.DeviceName.Substring(screen.DeviceName.LastIndexOf('\\') + 1);
                 resLabel.Text = $"⛶ {cleanName}";
 
-                CustomToolTips.SetToolTip(resLabel, "Click here to identify the screen", $"resLabel{j}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(resLabel, Localization.GetLocalizedText(31), $"resLabel{j}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
                 if (screensLabels.Count == 0)
                 {

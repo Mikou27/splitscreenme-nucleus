@@ -1,4 +1,6 @@
-﻿namespace Nucleus.Gaming
+﻿using System.Collections.Generic;
+
+namespace Nucleus.Gaming
 {
     public class Handler
     {
@@ -21,5 +23,6 @@
         public string CommentCount { get; set; }
         public string CurrentVersion { get; set; }
         public string CurrentPackage { get; set; }
+        public List<string> GameGenres { get; set; }
     }
 }

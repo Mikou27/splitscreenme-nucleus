@@ -88,7 +88,7 @@ namespace Nucleus.Coop
                     Image = ImageCache.GetImage(themePath + "players.png")
                 };
 
-                CustomToolTips.SetToolTip(playerIcon, "Number of players.", "playerIcon", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(playerIcon, Localization.GetLocalizedText(52), "playerIcon", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
                 title = new Label
                 {
@@ -276,7 +276,7 @@ namespace Nucleus.Coop
             float favoriteX = ((Width - favoriteBox.Width) * scale) - (playerIcon.Width );
             float favoriteY = Height - (favoriteBox.Height + 5);
             favoriteBox.Location = new Point((int)favoriteX, icons_Container.Location.Y);
-            CustomToolTips.SetToolTip(favoriteBox, "Add or remove this game from your favorites.", "favoriteBox", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(favoriteBox,Localization.GetLocalizedText(53), "favoriteBox", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
 
            // Height= icons_Container.Bottom+border;
 

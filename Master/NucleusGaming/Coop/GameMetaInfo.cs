@@ -2,11 +2,13 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Nucleus.Gaming.App.Settings;
+using Nucleus.Gaming.Cache;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -43,6 +45,17 @@ namespace Nucleus.Gaming.Coop
             set
             {
                 iconPath = value;
+                SaveGameMetaInfo();
+            }
+        }
+
+        private List<string>  genres;
+        public List<string> Genres
+        {
+            get => genres;
+            set
+            {
+                genres = value;
                 SaveGameMetaInfo();
             }
         }
@@ -191,10 +204,39 @@ namespace Nucleus.Gaming.Coop
                         favorite = JMetaInfo[gameGuid]["Favorite"] != null && (bool)JMetaInfo[gameGuid]["Favorite"];
                         firstLaunch = JMetaInfo[gameGuid]["FirstLaunch"] == null || (bool)JMetaInfo[gameGuid]["FirstLaunch"];
                         checkUpdate = JMetaInfo[gameGuid]["CheckUpdate"] == null || (bool)JMetaInfo[gameGuid]["CheckUpdate"];
-                        useApiIndex = JMetaInfo[gameGuid]["UseApiIndex"] == null ? App_Misc.UseXinputIndex : (bool)JMetaInfo[gameGuid]["UseApiIndex"];                       
+                        useApiIndex = JMetaInfo[gameGuid]["UseApiIndex"] == null ? App_Misc.UseXinputIndex : (bool)JMetaInfo[gameGuid]["UseApiIndex"];
                         useApiIndexForGuests = JMetaInfo[gameGuid]["UseApiIndexForGuests"] == null ? useApiIndex : (bool)JMetaInfo[gameGuid]["UseApiIndexForGuests"];
                         profileAssignGamepadByButonPress = JMetaInfo[gameGuid]["ProfileAssignGamepadByButonPress"] == null ? App_Misc.ProfileAssignGamepadByButonPress : (bool)JMetaInfo[gameGuid]["ProfileAssignGamepadByButonPress"];
                         steamLanguage = (string)JMetaInfo[gameGuid]["SteamLanguage"] ?? "App Setting";
+
+                        bool noGenres = JMetaInfo[gameGuid]["Genres"] == null;
+                        var _genres = new List<string>();
+
+                        if (!noGenres)
+                        {
+                            JToken jGenres = JMetaInfo[gameGuid]["Genres"];
+                            for (int s = 0; s < jGenres.Count(); s++)
+                            {
+                                _genres.Add(jGenres[s].ToString());
+                            }
+                        }
+                        else
+                        {
+                            var handler = HubCache.SearchById(gen.HandlerId);
+
+                            if (handler != null)
+                            {
+                                _genres = handler.GameGenres;
+                            }
+                        }
+
+                        genres = _genres;
+
+                        if (noGenres)
+                        {
+                            SaveGameMetaInfo();
+                        }
+
                         return;
                     }
 
@@ -211,6 +253,16 @@ namespace Nucleus.Gaming.Coop
                     useApiIndexForGuests = useApiIndex;
                     profileAssignGamepadByButonPress = App_Misc.ProfileAssignGamepadByButonPress;
                     steamLanguage = "App Setting";
+
+                    var __genres = new List<string>();
+                    var _handler = HubCache.SearchById(gen.HandlerId);
+
+                    if (_handler != null)
+                    {
+                        __genres = _handler.GameGenres;
+                    }
+
+                    genres = __genres;
                 }
 
                 SaveGameMetaInfo();
@@ -257,6 +309,7 @@ namespace Nucleus.Gaming.Coop
                         JMetaInfo[gameGuid]["UseApiIndexForGuests"] = useApiIndexForGuests;
                         JMetaInfo[gameGuid]["ProfileAssignGamepadByButonPress"] = profileAssignGamepadByButonPress;
                         JMetaInfo[gameGuid]["SteamLanguage"] = steamLanguage;
+                        JMetaInfo[gameGuid]["Genres"] = JArray.FromObject(genres); 
                     }
                     else
                     {
@@ -273,7 +326,8 @@ namespace Nucleus.Gaming.Coop
                                                             new JProperty("UseApiIndex", useApiIndex),
                                                             new JProperty("UseApiIndexForGuests", useApiIndexForGuests),
                                                             new JProperty("ProfileAssignGamepadByButonPress", profileAssignGamepadByButonPress),
-                                                            new JProperty("SteamLanguage", steamLanguage)
+                                                            new JProperty("SteamLanguage", steamLanguage),
+                                                            new JProperty("Genres", genres)
                                                             ));
                         JMetaInfo.Add(gameMeta);
                     }
@@ -292,7 +346,8 @@ namespace Nucleus.Gaming.Coop
                                                    new JProperty("UseApiIndex", useApiIndex),
                                                    new JProperty("UseApiIndexForGuests", useApiIndexForGuests),
                                                    new JProperty("ProfileAssignGamepadByButonPress", profileAssignGamepadByButonPress),
-                                                   new JProperty("SteamLanguage", steamLanguage)
+                                                   new JProperty("SteamLanguage", steamLanguage),
+                                                   new JProperty("Genres", genres)
                                                    );
 
                     JMetaInfo = new JObject(new JProperty(gameGuid, gameMeta));

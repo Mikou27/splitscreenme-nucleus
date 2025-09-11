@@ -204,10 +204,10 @@ namespace Nucleus.Coop
 
                 if (GameInfo != null)
                 {
-                    CustomToolTips.SetToolTip(FavoriteBox, "Add or remove this game from your favorites.", $"FavoriteBox_{GameInfo.GUID}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-                    CustomToolTips.SetToolTip(GameOptions, "Game options menu.", $"GameOptions_{GameInfo.GUID}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-                    CustomToolTips.SetToolTip(HandlerUpdate, "Update game handler.", $"HandlerUpdate{GameInfo.GUID}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-                    CustomToolTips.SetToolTip(playerIcon, "Number of supported players.", $"playerIcon{GameInfo.GUID}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                    CustomToolTips.SetToolTip(FavoriteBox, Localization.GetLocalizedText(48), $"FavoriteBox_{GameInfo.GUID}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                    CustomToolTips.SetToolTip(GameOptions, Localization.GetLocalizedText(49), $"GameOptions_{GameInfo.GUID}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                    CustomToolTips.SetToolTip(HandlerUpdate, Localization.GetLocalizedText(50), $"HandlerUpdate{GameInfo.GUID}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                    CustomToolTips.SetToolTip(playerIcon, Localization.GetLocalizedText(51), $"playerIcon{GameInfo.GUID}", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                    
                     //Set a different title color if a handler update is available using a timer(need to wait for the hub to return the value).
                     IsUpdateAvailableTimer = new System.Windows.Forms.Timer();

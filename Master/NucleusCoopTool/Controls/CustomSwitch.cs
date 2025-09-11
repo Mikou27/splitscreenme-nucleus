@@ -1,4 +1,5 @@
-﻿using Nucleus.Gaming.Controls;
+﻿using Nucleus.Gaming;
+using Nucleus.Gaming.Controls;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -83,9 +84,7 @@ namespace Nucleus.Coop.Controls
         private void Init()
         {
             tick.Cursor = TickCursor;        
-            outline = new Pen(Color.Transparent);
-            CustomToolTips.SetToolTip(tick, radioTooltipText, "CustomRadioButton", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-
+            outline = new Pen(Color.Transparent);          
             init = true;
         }
 

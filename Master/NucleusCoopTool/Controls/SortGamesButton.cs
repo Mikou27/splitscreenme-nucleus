@@ -19,7 +19,7 @@ namespace Nucleus.Coop.Controls
             Cursor = Theme_Settings.Hand_Cursor;
             Size = new Size(size.Width, size.Height);
             Location = location;
-            CustomToolTips.SetToolTip(this, "Game list sorting options.", this.GetType().ToString(), new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(this, Localization.GetLocalizedText(32), this.GetType().ToString(), new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
             Click += OpenSortOptions;
             
         }

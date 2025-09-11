@@ -120,7 +120,7 @@ namespace Nucleus.Gaming.Forms
                     if (HotkeysRegistration.ChkPassThrough[0])
                     {
                         GenericGameHandler.Instance.CurrentGameInfo.OnCustomHotKey_1.Invoke();
-                        Globals.MainOSD.Show(800, $"Custom Hotkey 1");
+                        Globals.MainOSD.Show(800, HotkeysRegistration.CustomHotKeyDisplayText[0] == "" ? $"Custom Hotkey 1" : HotkeysRegistration.CustomHotKeyDisplayText[0]);
                         HotkeyCoolDown();
 
                         base.WndProc(ref m);
@@ -132,7 +132,7 @@ namespace Nucleus.Gaming.Forms
                     if (HotkeysRegistration.ChkPassThrough[1])
                     {
                         GenericGameHandler.Instance.CurrentGameInfo.OnCustomHotKey_2.Invoke();
-                        Globals.MainOSD.Show(800, $"Custom Hotkey 2");
+                        Globals.MainOSD.Show(800, HotkeysRegistration.CustomHotKeyDisplayText[1] == "" ? $"Custom Hotkey 2" : HotkeysRegistration.CustomHotKeyDisplayText[1]);
                         HotkeyCoolDown();
 
                         base.WndProc(ref m);
@@ -144,7 +144,7 @@ namespace Nucleus.Gaming.Forms
                     if (HotkeysRegistration.ChkPassThrough[2])
                     {
                         GenericGameHandler.Instance.CurrentGameInfo.OnCustomHotKey_3.Invoke();
-                        Globals.MainOSD.Show(800, $"Custom Hotkey 3");
+                        Globals.MainOSD.Show(800, HotkeysRegistration.CustomHotKeyDisplayText[2] == "" ? $"Custom Hotkey 3" : HotkeysRegistration.CustomHotKeyDisplayText[2]);
                         HotkeyCoolDown();
 
                         base.WndProc(ref m);

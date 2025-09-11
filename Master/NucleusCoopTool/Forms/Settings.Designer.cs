@@ -781,7 +781,7 @@ namespace Nucleus.Coop
             // rm_HKTxt
             // 
             this.rm_HKTxt.BorderColor = System.Drawing.Color.Blue;
-            this.rm_HKTxt.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            //this.rm_HKTxt.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.rm_HKTxt.Hint = null;
             this.rm_HKTxt.Location = new System.Drawing.Point(205, 197);
             this.rm_HKTxt.Margin = new System.Windows.Forms.Padding(2);
@@ -791,7 +791,7 @@ namespace Nucleus.Coop
             this.rm_HKTxt.Size = new System.Drawing.Size(36, 21);
             this.rm_HKTxt.TabIndex = 99;
             this.rm_HKTxt.Tag = "HotKeyTextBox";
-            this.rm_HKTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            //this.rm_HKTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // hkLabel4
             // 
@@ -857,7 +857,7 @@ namespace Nucleus.Coop
             // swl_HKTxt
             // 
             this.swl_HKTxt.BorderColor = System.Drawing.Color.Blue;
-            this.swl_HKTxt.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            //this.swl_HKTxt.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.swl_HKTxt.Hint = null;
             this.swl_HKTxt.Location = new System.Drawing.Point(205, 173);
             this.swl_HKTxt.Margin = new System.Windows.Forms.Padding(2);
@@ -867,7 +867,7 @@ namespace Nucleus.Coop
             this.swl_HKTxt.Size = new System.Drawing.Size(36, 21);
             this.swl_HKTxt.TabIndex = 95;
             this.swl_HKTxt.Tag = "HotKeyTextBox";
-            this.swl_HKTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            //this.swl_HKTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // csm_Cmb
             // 

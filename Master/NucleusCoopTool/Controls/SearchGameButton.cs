@@ -82,9 +82,9 @@ namespace Nucleus.Coop.Controls
                 }
             }
 
-            CustomToolTips.SetToolTip(btn_AddGameLabel, "Search and add a game to the game list (its handler must be installed).", "btnSearch", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(btn_AddGamePb, "Search and add a game to the game list (its handler must be installed).", "btnSearch", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(this, "Search and add a game to the game list (its handler must be installed).", "btnSearch", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(btn_AddGameLabel, Localization.GetLocalizedText(21), "btnSearch", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(btn_AddGamePb, Localization.GetLocalizedText(21), "btnSearch", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(this, Localization.GetLocalizedText(21), "btnSearch", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
             Click += UI_Functions.SearchGameButton_Click;
 
             btn_AddGameLabel.Text = "Search Games";

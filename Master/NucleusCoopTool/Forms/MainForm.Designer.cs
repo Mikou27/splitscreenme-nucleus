@@ -188,191 +188,191 @@ namespace Nucleus.Coop
             this.removeGameMenuItem});
             this.GameOptionMenu.Name = "gameContextMenuStrip";
             this.GameOptionMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.GameOptionMenu.Size = new System.Drawing.Size(306, 662);
+            this.GameOptionMenu.Size = new System.Drawing.Size(305, 640);
             // 
             // gameNameMenuItem
             // 
             this.gameNameMenuItem.BackColor = System.Drawing.Color.Transparent;
             this.gameNameMenuItem.Name = "gameNameMenuItem";
-            this.gameNameMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.gameNameMenuItem.Size = new System.Drawing.Size(304, 22);
             this.gameNameMenuItem.Text = "null";
             // 
             // menuSeparator1
             // 
             this.menuSeparator1.Name = "menuSeparator1";
-            this.menuSeparator1.Size = new System.Drawing.Size(302, 6);
+            this.menuSeparator1.Size = new System.Drawing.Size(301, 6);
             // 
             // notesMenuItem
             // 
             this.notesMenuItem.Name = "notesMenuItem";
             this.notesMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.notesMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.notesMenuItem.Size = new System.Drawing.Size(304, 22);
             this.notesMenuItem.Text = "Handler Author\'s Notes";
             this.notesMenuItem.Visible = false;
             // 
             // detailsMenuItem
             // 
             this.detailsMenuItem.Name = "detailsMenuItem";
-            this.detailsMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.detailsMenuItem.Size = new System.Drawing.Size(304, 22);
             this.detailsMenuItem.Text = "Nucleus Game Details";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(302, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(301, 6);
             // 
             // openHandlerMenuItem
             // 
             this.openHandlerMenuItem.Name = "openHandlerMenuItem";
-            this.openHandlerMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.openHandlerMenuItem.Size = new System.Drawing.Size(304, 22);
             this.openHandlerMenuItem.Text = "Open Game Handler";
             // 
             // openOrigExePathMenuItem
             // 
             this.openOrigExePathMenuItem.Name = "openOrigExePathMenuItem";
-            this.openOrigExePathMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.openOrigExePathMenuItem.Size = new System.Drawing.Size(304, 22);
             this.openOrigExePathMenuItem.Text = "Open Original Exe Path";
             // 
             // openContentFolderMenuItem
             // 
             this.openContentFolderMenuItem.Name = "openContentFolderMenuItem";
-            this.openContentFolderMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.openContentFolderMenuItem.Size = new System.Drawing.Size(304, 22);
             this.openContentFolderMenuItem.Text = "Open Nucleus Content Folder";
             // 
             // deleteContentFolderMenuItem
             // 
             this.deleteContentFolderMenuItem.Name = "deleteContentFolderMenuItem";
-            this.deleteContentFolderMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.deleteContentFolderMenuItem.Size = new System.Drawing.Size(304, 22);
             this.deleteContentFolderMenuItem.Text = "Delete Game Content Folder";
             // 
             // menuSeparator2
             // 
             this.menuSeparator2.Name = "menuSeparator2";
-            this.menuSeparator2.Size = new System.Drawing.Size(302, 6);
+            this.menuSeparator2.Size = new System.Drawing.Size(301, 6);
             // 
             // openUserProfConfigMenuItem
             // 
             this.openUserProfConfigMenuItem.Name = "openUserProfConfigMenuItem";
-            this.openUserProfConfigMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.openUserProfConfigMenuItem.Size = new System.Drawing.Size(304, 22);
             this.openUserProfConfigMenuItem.Text = "Open UserProfile Config Path";
             this.openUserProfConfigMenuItem.Visible = false;
             // 
             // deleteUserProfConfigMenuItem
             // 
             this.deleteUserProfConfigMenuItem.Name = "deleteUserProfConfigMenuItem";
-            this.deleteUserProfConfigMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.deleteUserProfConfigMenuItem.Size = new System.Drawing.Size(304, 22);
             this.deleteUserProfConfigMenuItem.Text = "Delete UserProfile Config Path";
             this.deleteUserProfConfigMenuItem.Visible = false;
             // 
             // openUserProfSaveMenuItem
             // 
             this.openUserProfSaveMenuItem.Name = "openUserProfSaveMenuItem";
-            this.openUserProfSaveMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.openUserProfSaveMenuItem.Size = new System.Drawing.Size(304, 22);
             this.openUserProfSaveMenuItem.Text = "Open UserProfile Save Path";
             this.openUserProfSaveMenuItem.Visible = false;
             // 
             // deleteUserProfSaveMenuItem
             // 
             this.deleteUserProfSaveMenuItem.Name = "deleteUserProfSaveMenuItem";
-            this.deleteUserProfSaveMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.deleteUserProfSaveMenuItem.Size = new System.Drawing.Size(304, 22);
             this.deleteUserProfSaveMenuItem.Text = "Delete UserProfile Save Path";
             this.deleteUserProfSaveMenuItem.Visible = false;
             // 
             // openDocumentConfMenuItem
             // 
             this.openDocumentConfMenuItem.Name = "openDocumentConfMenuItem";
-            this.openDocumentConfMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.openDocumentConfMenuItem.Size = new System.Drawing.Size(304, 22);
             this.openDocumentConfMenuItem.Text = "Open Document Config Path";
             this.openDocumentConfMenuItem.Visible = false;
             // 
             // deleteDocumentConfMenuItem
             // 
             this.deleteDocumentConfMenuItem.Name = "deleteDocumentConfMenuItem";
-            this.deleteDocumentConfMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.deleteDocumentConfMenuItem.Size = new System.Drawing.Size(304, 22);
             this.deleteDocumentConfMenuItem.Text = "Delete Document Config Path";
             this.deleteDocumentConfMenuItem.Visible = false;
             // 
             // openDocumentSaveMenuItem
             // 
             this.openDocumentSaveMenuItem.Name = "openDocumentSaveMenuItem";
-            this.openDocumentSaveMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.openDocumentSaveMenuItem.Size = new System.Drawing.Size(304, 22);
             this.openDocumentSaveMenuItem.Text = "Open Document Save Path";
             this.openDocumentSaveMenuItem.Visible = false;
             // 
             // deleteDocumentSaveMenuItem
             // 
             this.deleteDocumentSaveMenuItem.Name = "deleteDocumentSaveMenuItem";
-            this.deleteDocumentSaveMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.deleteDocumentSaveMenuItem.Size = new System.Drawing.Size(304, 22);
             this.deleteDocumentSaveMenuItem.Text = "Delete Document Save Path";
             this.deleteDocumentSaveMenuItem.Visible = false;
             // 
             // openBackupFolderMenuItem
             // 
             this.openBackupFolderMenuItem.Name = "openBackupFolderMenuItem";
-            this.openBackupFolderMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.openBackupFolderMenuItem.Size = new System.Drawing.Size(304, 22);
             this.openBackupFolderMenuItem.Text = "Open Backup Folder";
             // 
             // deleteBackupFolderMenuItem
             // 
             this.deleteBackupFolderMenuItem.Name = "deleteBackupFolderMenuItem";
-            this.deleteBackupFolderMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.deleteBackupFolderMenuItem.Size = new System.Drawing.Size(304, 22);
             this.deleteBackupFolderMenuItem.Text = "Delete Backup Folder";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(302, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(301, 6);
             // 
             // useAPIIndexMenuItem
             // 
             this.useAPIIndexMenuItem.Name = "useAPIIndexMenuItem";
-            this.useAPIIndexMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.useAPIIndexMenuItem.Size = new System.Drawing.Size(304, 22);
             this.useAPIIndexMenuItem.Text = "Assign Gamepads By Index";
             // 
             // useGamepadButtonPressMenuItem
             // 
             this.useGamepadButtonPressMenuItem.Name = "useGamepadButtonPressMenuItem";
-            this.useGamepadButtonPressMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.useGamepadButtonPressMenuItem.Size = new System.Drawing.Size(304, 22);
             this.useGamepadButtonPressMenuItem.Text = "Assign Gamepads On Button Press (profile)";
             // 
             // useGamepadAPIIndexForGuestsMenuItem
             // 
             this.useGamepadAPIIndexForGuestsMenuItem.Name = "useGamepadAPIIndexForGuestsMenuItem";
-            this.useGamepadAPIIndexForGuestsMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.useGamepadAPIIndexForGuestsMenuItem.Size = new System.Drawing.Size(304, 22);
             this.useGamepadAPIIndexForGuestsMenuItem.Text = "Assign Gamepads By Index For Guests Only ";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(302, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(301, 6);
             // 
             // keepInstancesFolderMenuItem
             // 
             this.keepInstancesFolderMenuItem.Name = "keepInstancesFolderMenuItem";
-            this.keepInstancesFolderMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.keepInstancesFolderMenuItem.Size = new System.Drawing.Size(304, 22);
             this.keepInstancesFolderMenuItem.Text = "Keep Instances Content Folder";
             // 
             // disableProfilesMenuItem
             // 
             this.disableProfilesMenuItem.Name = "disableProfilesMenuItem";
-            this.disableProfilesMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.disableProfilesMenuItem.Size = new System.Drawing.Size(304, 22);
             this.disableProfilesMenuItem.Text = "Disable Profile";
             // 
             // disableHandlerUpdateMenuItem
             // 
             this.disableHandlerUpdateMenuItem.Name = "disableHandlerUpdateMenuItem";
-            this.disableHandlerUpdateMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.disableHandlerUpdateMenuItem.Size = new System.Drawing.Size(304, 22);
             this.disableHandlerUpdateMenuItem.Text = "Disable Handler Update";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(302, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(301, 6);
             // 
             // changeIconMenuItem
             // 
             this.changeIconMenuItem.Name = "changeIconMenuItem";
-            this.changeIconMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.changeIconMenuItem.Size = new System.Drawing.Size(304, 22);
             this.changeIconMenuItem.Text = "Change Game Icon";
             // 
             // gameAssetsMenuItem
@@ -381,7 +381,7 @@ namespace Nucleus.Coop
             this.coverMenuItem,
             this.screenshotsMenuItem});
             this.gameAssetsMenuItem.Name = "gameAssetsMenuItem";
-            this.gameAssetsMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.gameAssetsMenuItem.Size = new System.Drawing.Size(304, 22);
             this.gameAssetsMenuItem.Text = "Game Assets";
             // 
             // coverMenuItem
@@ -403,7 +403,7 @@ namespace Nucleus.Coop
             this.steamLanguage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SteamLangCb});
             this.steamLanguage.Name = "steamLanguage";
-            this.steamLanguage.Size = new System.Drawing.Size(305, 22);
+            this.steamLanguage.Size = new System.Drawing.Size(304, 22);
             this.steamLanguage.Text = "Steam Language";
             // 
             // SteamLangCb
@@ -447,12 +447,12 @@ namespace Nucleus.Coop
             // menuSeparator3
             // 
             this.menuSeparator3.Name = "menuSeparator3";
-            this.menuSeparator3.Size = new System.Drawing.Size(302, 6);
+            this.menuSeparator3.Size = new System.Drawing.Size(301, 6);
             // 
             // removeGameMenuItem
             // 
             this.removeGameMenuItem.Name = "removeGameMenuItem";
-            this.removeGameMenuItem.Size = new System.Drawing.Size(305, 22);
+            this.removeGameMenuItem.Size = new System.Drawing.Size(304, 22);
             this.removeGameMenuItem.Text = "Remove Game From List";
             // 
             // socialLinksMenu
@@ -470,41 +470,41 @@ namespace Nucleus.Coop
             this.socialLinksMenu.Name = "socialLinksMenu";
             this.socialLinksMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.socialLinksMenu.ShowImageMargin = false;
-            this.socialLinksMenu.Size = new System.Drawing.Size(137, 126);
+            this.socialLinksMenu.Size = new System.Drawing.Size(139, 126);
             // 
             // fAQMenuItem
             // 
             this.fAQMenuItem.Name = "fAQMenuItem";
-            this.fAQMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.fAQMenuItem.Size = new System.Drawing.Size(138, 22);
             this.fAQMenuItem.Text = "FAQ";
             // 
             // discordMenuItem
             // 
             this.discordMenuItem.Name = "discordMenuItem";
-            this.discordMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.discordMenuItem.Size = new System.Drawing.Size(138, 22);
             this.discordMenuItem.Text = "Discord";
             // 
             // redditMenuItem
             // 
             this.redditMenuItem.Name = "redditMenuItem";
-            this.redditMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.redditMenuItem.Size = new System.Drawing.Size(138, 22);
             this.redditMenuItem.Text = "Reddit";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(135, 6);
             // 
             // splitCalculatorMenuItem
             // 
             this.splitCalculatorMenuItem.Name = "splitCalculatorMenuItem";
-            this.splitCalculatorMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.splitCalculatorMenuItem.Size = new System.Drawing.Size(138, 22);
             this.splitCalculatorMenuItem.Text = "SplitCalculator";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(133, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(135, 6);
             // 
             // thirdPartyToolsToolStripMenuItem
             // 
@@ -514,7 +514,7 @@ namespace Nucleus.Coop
             this.hidHideToolStripMenuItem,
             this.scpToolkitToolStripMenuItem});
             this.thirdPartyToolsToolStripMenuItem.Name = "thirdPartyToolsToolStripMenuItem";
-            this.thirdPartyToolsToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.thirdPartyToolsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.thirdPartyToolsToolStripMenuItem.Text = "Third Party Tools";
             // 
             // xOutputToolStripMenuItem
@@ -780,8 +780,8 @@ namespace Nucleus.Coop
             this.SaveProfileSwitch.RadioBackColor = System.Drawing.Color.Transparent;
             this.SaveProfileSwitch.RadioChecked = true;
             this.SaveProfileSwitch.RadioText = "Save Profile";
-            this.SaveProfileSwitch.RadioTooltipText = " If turned off the current setup will not be saved to a new profile.";
-            this.SaveProfileSwitch.Size = new System.Drawing.Size(109, 16);
+            this.SaveProfileSwitch.RadioTooltipText = "If turned off the current setup will not be saved to a new profile.";
+            this.SaveProfileSwitch.Size = new System.Drawing.Size(0, 0);
             this.SaveProfileSwitch.TabIndex = 105;
             this.SaveProfileSwitch.TextColor = System.Drawing.Color.White;
             // 

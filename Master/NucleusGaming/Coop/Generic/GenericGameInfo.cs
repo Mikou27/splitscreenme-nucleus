@@ -412,7 +412,7 @@ namespace Nucleus.Gaming
             }
 
             MetaInfo.LoadGameMetaInfo(this);
-
+      
             if (MetaInfo.CheckUpdate)
             {
                 if (checkUpdate[0])//workaround else handler update is checked before instances setup too,
@@ -508,7 +508,7 @@ namespace Nucleus.Gaming
         {
             var handlerInstance = GenericGameHandler.Instance;
 
-            engine.SetValue("Context", handlerInstance.context);
+            engine.SetValue("Context", handlerInstance.Context);
             engine.SetValue("Handler", handlerInstance);
             engine.SetValue("Player", player);
             engine.SetValue("Game", this);
@@ -525,13 +525,13 @@ namespace Nucleus.Gaming
         {
             var handlerInstance = GenericGameHandler.Instance;
 
-            GenericContext context = new GenericContext(profile, info, handlerInstance, hasKeyboardPlayer);
+            GenericContext Context = new GenericContext(profile, info, handlerInstance, hasKeyboardPlayer);
 
             Type t = GetType();
             PropertyInfo[] props = t.GetProperties();
             FieldInfo[] fields = t.GetFields();
 
-            Type c = context.GetType();
+            Type c = Context.GetType();
             PropertyInfo[] cprops = c.GetProperties();
             FieldInfo[] cfields = c.GetFields();
 
@@ -551,7 +551,7 @@ namespace Nucleus.Gaming
                 }
 
                 object value = p.GetValue(this, null);
-                d.SetValue(context, value, null);
+                d.SetValue(Context, value, null);
             }
 
             for (int i = 0; i < fields.Length; i++)
@@ -569,10 +569,10 @@ namespace Nucleus.Gaming
                 }
 
                 object value = source.GetValue(this);
-                dest.SetValue(context, value);
+                dest.SetValue(Context, value);
             }
 
-            return context;
+            return Context;
         }
 
 

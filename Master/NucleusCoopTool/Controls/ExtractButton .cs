@@ -83,9 +83,9 @@ namespace Nucleus.Coop.Controls
                 }
             }
 
-            CustomToolTips.SetToolTip(btn_AddGameLabel, "Extract a handler from a \".nc\" archive.", "btn_Extract", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(btn_AddGamePb, "Extract a handler from a \".nc\" archive.", "btn_Extract", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
-            CustomToolTips.SetToolTip(this, "Extract a handler from a \".nc\" archive.", "btn_Extract", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(btn_AddGameLabel, Localization.GetLocalizedText(1), "btn_Extract", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(btn_AddGamePb, Localization.GetLocalizedText(1), "btn_Extract", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+            CustomToolTips.SetToolTip(this, Localization.GetLocalizedText(1), "btn_Extract", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
             Click += UI_Functions.ExtractHandlerButton_Click;
 
             btn_AddGameLabel.Text = "Extract Handler";

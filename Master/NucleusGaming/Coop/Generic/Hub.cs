@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 
 namespace Nucleus.Gaming.Coop.Generic
@@ -60,7 +63,7 @@ namespace Nucleus.Gaming.Coop.Generic
             string id = Handler.Id;
             int newVersion = -1;
 
-            string resp = Get("https://hub.splitscreen.me/api/v1/" + "handler/" + id);
+            string resp = Get("http://localhost:3000//api/v1/" + "handler/" + id);
 
             if (resp == null)
             {
@@ -92,6 +95,68 @@ namespace Nucleus.Gaming.Coop.Generic
             newVersion = int.TryParse(array[0]["currentVersion"].ToString(), out int _v) ? _v : -1;
 
             return newVersion > Handler.Version;
+        }
+
+        public List<string> GetGameGenres(string handlerId)
+        {
+            List<string> genres = new List<string>();
+
+            if (handlerId == null)
+            {
+                return genres;
+            }
+
+            string resp = Get("http://localhost:3000//api/v1/" + "handler/" + handlerId);
+
+            if (resp == null)
+            {
+                return genres;
+            }
+            else if (resp == "{}")
+            {
+                return genres;
+            }
+
+            JObject jObject = null;
+            try
+            {
+                jObject = JsonConvert.DeserializeObject(resp) as JObject;
+            }
+            catch
+            {
+                return genres;
+            }
+
+            if (jObject == null)
+            {
+                return genres;
+            }
+
+            JArray array = jObject["Handlers"] as JArray;
+
+            if (array == null)
+            {
+                return genres;
+            }
+            else if (array.Count != 1)
+            {
+                return genres;
+            }
+
+            if (array[0]["gameGenres"] != null)
+            {
+
+                JToken jGenres = array["gameGenres"] as JToken;
+                
+                for (int s = 0; s < jGenres.Count(); s++)
+                {
+                    genres.Add(s.ToString());
+                }
+
+                return genres;
+            }
+
+            return null;
         }
 
         public string Get(string uri)

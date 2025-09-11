@@ -4,7 +4,9 @@ using Nucleus.Gaming.App.Settings;
 using Nucleus.Gaming.Cache;
 using Nucleus.Gaming.Windows;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Management;
 using System.Windows.Forms;
 
 namespace Nucleus.Coop
@@ -33,6 +35,57 @@ namespace Nucleus.Coop
 
         static void RunApplication(string[] args)
         {
+            //Process.Start(new ProcessStartInfo("ms-settings:display-advancedgraphics")
+            //{
+            //    UseShellExecute = true
+            //});
+            // GpuPrefrence setting available since Windows 10(1803 +) or Windows 11.
+            //GPU
+            //var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
+
+            //foreach (ManagementObject mo in searcher.Get())
+            //{
+            //    Console.WriteLine("== GPU Device Info ==");
+
+            //    foreach (PropertyData prop in mo.Properties)
+            //    {
+            //        if(prop.Value != null)
+            //        Console.WriteLine($"{prop.Name}: {prop.Value}");
+            //    }
+
+            //    Console.WriteLine(new string('-', 30));
+            //}
+
+            //CPU
+            //var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+
+            //foreach (ManagementObject mo in searcher.Get())
+            //{
+            //    Console.WriteLine("== CPU Info ==");
+
+            //    foreach (PropertyData prop in mo.Properties)
+            //    {
+            //        Console.WriteLine($"{prop.Name}: {prop.Value}");
+            //    }
+
+            //    Console.WriteLine(new string('-', 30));
+            //}
+
+            //Ram 
+            //var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMemory");
+
+            //foreach (ManagementObject mo in searcher.Get())
+            //{
+            //    Console.WriteLine("== RAM Module Info ==");
+
+            //    foreach (PropertyData prop in mo.Properties)
+            //    {
+            //        Console.WriteLine($"{prop.Name}: {prop.Value}");
+            //    }
+
+            //    Console.WriteLine(new string('-', 30));
+            //}
+
             // initialize DPIManager BEFORE setting 
             // the application to be DPI aware
             DPIManager.PreInitialize();

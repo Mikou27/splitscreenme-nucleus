@@ -85,6 +85,11 @@ namespace Nucleus.Coop.UI
                 homeScreen.Controls.Add(notesZoom);
 
                 homeScreen.Paint += UI_Graphics.HomeScreen_Paint;
+                
+                homeScreen.AllowDrop = true;
+                homeScreen.DragEnter += UI_Functions.ExtrtactHandlerDragEnter;
+                homeScreen.DragDrop += UI_Functions.ExtrtactHandlerDragDrop;
+
             }
         }
 
@@ -118,7 +123,7 @@ namespace Nucleus.Coop.UI
             {
                 settingsButton = value;
                 settingsButton.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "title_settings.png");
-                CustomToolTips.SetToolTip(settingsButton, "Global Nucleus Co-op settings.", "btn_settings", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(settingsButton, Localization.GetLocalizedText(36), "btn_settings", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 settingsButton.Click += UI_Functions.SettingsButton_Click;
                 settingsButton.MouseEnter += UI_Functions.SettingsButton_MouseEnter;
                 settingsButton.MouseLeave += UI_Functions.SettingsButton_MouseLeave;
@@ -220,7 +225,7 @@ namespace Nucleus.Coop.UI
                 toggleVirtualMouse = value;
                 toggleVirtualMouse.Paint += UI_Graphics.VirtualMouseToggle_Paint;
                 toggleVirtualMouse.MouseClick += UI_Functions.VirtualMouseToggle_MouseClick;
-                CustomToolTips.SetToolTip(toggleVirtualMouse, "Left click to turn On/Off gamepad emulated mouse.\nRight click to open gamepad shortcuts settings. ", "toggleVirtualMouse", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(toggleVirtualMouse, Localization.GetLocalizedText(37), "toggleVirtualMouse", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 GamepadNavigation.OnUpdateState += ToggleVirtualMouse.Invalidate;
             }
         }
@@ -235,7 +240,7 @@ namespace Nucleus.Coop.UI
                 donationButton.BackColor = Color.Transparent;
                 donationButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
                 donationButton.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "donation.png");
-                CustomToolTips.SetToolTip(donationButton, "Nucleus Co-op Patreon.", "donationBtn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(donationButton, Localization.GetLocalizedText(38), "donationBtn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 donationButton.Click += UI_Functions.DonationButton_Click;
 
             }
@@ -262,7 +267,7 @@ namespace Nucleus.Coop.UI
                 openLogButton.BackColor = Color.Transparent;
                 openLogButton.FlatAppearance.MouseOverBackColor = Color.Transparent; 
                 openLogButton.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "log.png");
-                CustomToolTips.SetToolTip(openLogButton, "Open Nucleus debug-log.txt file if available, debug log can be disabled in Nucleus settings in the \"Settings\" tab.", "btn_debuglog", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(openLogButton, Localization.GetLocalizedText(39), "btn_debuglog", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 openLogButton.Click += UI_Functions.OpenLogButton_Click;
                 openLogButton.MouseEnter += UI_Functions.OpenLogButton_MouseEnter;
                 openLogButton.MouseLeave += UI_Functions.OpenLogButton_MouseLeave;
@@ -278,7 +283,7 @@ namespace Nucleus.Coop.UI
                 searchGameButton = value;
                 searchGameButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
                 searchGameButton.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "search_game.png");
-                CustomToolTips.SetToolTip(searchGameButton, "Search and add a game to the game list (its handler must be installed).", "btnSearch", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(searchGameButton, Localization.GetLocalizedText(40), "btnSearch", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 searchGameButton.Click += UI_Functions.SearchGameButton_Click;
                 searchGameButton.MouseEnter += UI_Functions.SearchGameButton_MouseEnter;
                 searchGameButton.MouseLeave += UI_Functions.SearchGameButton_MouseLeave;
@@ -294,7 +299,7 @@ namespace Nucleus.Coop.UI
                 extractHandlerButton = value;
                 extractHandlerButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
                 extractHandlerButton.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "extract_nc.png");
-                CustomToolTips.SetToolTip(extractHandlerButton, "Extract a handler from a \".nc\" archive.", "btn_Extract", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(extractHandlerButton, Localization.GetLocalizedText(41), "btn_Extract", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 extractHandlerButton.Click += UI_Functions.ExtractHandlerButton_Click;
                 extractHandlerButton.MouseEnter += UI_Functions.ExtractHandlerButton_MouseEnter;
                 extractHandlerButton.MouseLeave += UI_Functions.ExtractHandlerButton_MouseLeave;
@@ -340,7 +345,7 @@ namespace Nucleus.Coop.UI
             {
                 dwldAssetsButton = value;
                 dwldAssetsButton.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "title_download_assets.png");
-                CustomToolTips.SetToolTip(dwldAssetsButton, "Download or update games covers and screenshots.", "btn_downloadAssets", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(dwldAssetsButton, Localization.GetLocalizedText(42), "btn_downloadAssets", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 dwldAssetsButton.Click += UI_Functions.DwldAssetsButton_Click;
                 dwldAssetsButton.MouseEnter += UI_Functions.DwldAssetsButton_MouseEnter;
                 dwldAssetsButton.MouseLeave += UI_Functions.DwldAssetsButton_MouseLeave;
@@ -419,6 +424,11 @@ namespace Nucleus.Coop.UI
                 bigLogo = value;
                 bigLogo.Paint += UI_Graphics.BigLogo_Paint;
                 bigLogo.Image = ImageCache.GetImage(Globals.ThemeFolder + "logo.png");
+                bigLogo.MouseClick += UI_Functions.BigLogo_Click;
+                bigLogo.AllowDrop = true;
+                bigLogo.DragEnter += UI_Functions.ExtrtactHandlerDragEnter;
+                bigLogo.DragDrop += UI_Functions.ExtrtactHandlerDragDrop;
+                //bigLogo.Location = new Point((homeScreen.Width /2) - (bigLogo.Width /2), bigLogo.Location.Y);
             }
         }
 
@@ -431,7 +441,7 @@ namespace Nucleus.Coop.UI
                 expandHandlerNotesButton = value;
                 expandHandlerNotesButton.Cursor = Theme_Settings.Hand_Cursor;
                 expandHandlerNotesButton.Image = ImageCache.GetImage(Globals.ThemeFolder + "expand_Notes.png");
-                CustomToolTips.SetToolTip(expandHandlerNotesButton, "Expand handler notes.", "btn_expandNotes", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(expandHandlerNotesButton, Localization.GetLocalizedText(43), "btn_expandNotes", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
                 expandHandlerNotesButton.Click += UI_Functions.ExpandHandlerNotesButton_Click;
             }
         }
@@ -545,6 +555,8 @@ namespace Nucleus.Coop.UI
                 saveProfileSwitch = value;
                 saveProfileSwitch.TickCursor = Theme_Settings.Hand_Cursor;
                 saveProfileSwitch.Click += UI_Functions.SaveProfileSwitch_Click;
+                saveProfileSwitch.Visible = false;
+                CustomToolTips.SetToolTip(saveProfileSwitch.Controls[0], Localization.GetLocalizedText(0), saveProfileSwitch.Controls[0].Name, new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });              
             }       
         }
 
@@ -581,7 +593,7 @@ namespace Nucleus.Coop.UI
                 tutorialButton.MouseLeave += UI_Functions.TutorialButton_MouseLeave;
                 tutorialButton.Click += UI_Functions.TutorialButton_Click;
                 tutorialButton.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "instruction_closed.png");
-                CustomToolTips.SetToolTip(tutorialButton, "How to setup players.", "instruction_btn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                CustomToolTips.SetToolTip(tutorialButton, Localization.GetLocalizedText(44), "instruction_btn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
             }
         }
 

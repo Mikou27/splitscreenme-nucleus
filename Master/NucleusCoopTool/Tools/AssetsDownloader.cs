@@ -9,8 +9,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace Nucleus.Coop.Tools
 {
@@ -64,10 +66,17 @@ namespace Nucleus.Coop.Tools
 
                     Globals.MainOSD.Show(80000, $"Downloading Assets For {game.GameGuid}");
                     string coverUri = $@"https://images.igdb.com/igdb/image/upload/t_cover_big/{handler.GameCover}.jpg";
-                    string screenshotsUri = HubCache.GetScreenshotsUri(handler.Id);
+                    string screenshotsUri = GetScreenshotsUri(handler.Id);
+                    
+                    //GetGameGenres(handler.Id);
 
                     DownloadCovers(coverUri, game.GameGuid);
                     DownloadScreenshots(screenshotsUri, game.GameGuid);
+                }
+
+                foreach (string genre in gameGenres)
+                {
+                    Console.WriteLine(genre);
                 }
 
                 mainForm.Invoke((MethodInvoker)delegate ()
@@ -132,8 +141,7 @@ namespace Nucleus.Coop.Tools
                 {
                     Globals.MainOSD.Show(80000, $"Downloading Assets For {game.GameGuid}");
                     string coverUri = $@"https://images.igdb.com/igdb/image/upload/t_cover_big/{handler.GameCover}.jpg";
-                    string screenshotsUri = HubCache.GetScreenshotsUri(handler.Id);
-
+                    string screenshotsUri = GetScreenshotsUri(handler.Id);
                     DownloadCovers(coverUri, game.GameGuid);
                     DownloadScreenshots(screenshotsUri, game.GameGuid);
                 }
@@ -209,7 +217,12 @@ namespace Nucleus.Coop.Tools
                 JObject jsonData = JsonConvert.DeserializeObject(json) as JObject;
                 JArray array = jsonData["screenshots"] as JArray;
 
-                if (array.Count < 5)// <= if there is less than 5 screenshots available in the igdb's database
+                if(array == null)
+                {
+                    return;
+                }
+
+                if (array?.Count < 5)// <= if there is less than 5 screenshots available in the igdb's database
                 {
                     maxScreenshotsToDownload = array.Count;
                 }
@@ -275,5 +288,126 @@ namespace Nucleus.Coop.Tools
                 }
             }
         }
+
+        public static string GetScreenshotsUri(string id)
+        {
+            if (id == null) { return null; }
+            if (id == "{}" || id == "") { return null; }
+            string resp = HubCache.Get($@"http://localhost:3000/api/v1/screenshots/{id}");
+            return resp;
+        }
+
+        private static List<string> gameGenres = new List<string>();
+
+        public static List<string> GetGameGenres(string id)
+        {
+            if (id == null) { return null; }
+            if (id == "{}" || id == "") { return null; }
+
+            List<string> genres = new List<string>();
+
+            string resp = HubCache.Get($@"http://localhost:3000/api/v1/genres/{id}");
+            if (resp == null || resp == "")
+            {
+                return genres;
+            }
+
+            JObject JMetaInfo = (JObject)JsonConvert.DeserializeObject(resp);
+
+            bool arrayExists = JMetaInfo["genres"] != null;
+
+            if (arrayExists)
+            {
+                var test = JMetaInfo["genres"];
+                var sub = test[0]["genres"];
+
+                foreach (var t in sub)
+                {              
+                    string genre = t["name"].ToString();
+
+                    if (!genres.Any(g => g == genre))
+                    {
+                        genres.Add(genre);
+                        //Console.WriteLine(t["name"]);
+                    }
+                }
+            }
+
+            resp = HubCache.Get($@"http://localhost:3000/api/v1/player_perspectives/{id}");
+
+            if (resp == null || resp == "")
+            {
+                return genres;
+            }
+
+            JMetaInfo = (JObject)JsonConvert.DeserializeObject(resp);
+
+            arrayExists = JMetaInfo["player_perspectives"] != null;
+
+            if (arrayExists)
+            {
+                var test = JMetaInfo["player_perspectives"];
+                var sub = test[0]["player_perspectives"];
+
+                foreach (var t in sub)
+                {
+                    string genre = t["name"].ToString();
+                    if (genre == "Virtual Reality")
+                    {
+                        continue;
+                    }
+
+                    if (!genres.Any(g => g == genre))
+                    {
+                        genres.Add(genre);
+                        //Console.WriteLine(t["name"]);
+                    }
+                }
+            }
+
+            return genres;
+        }
+
+        
+
+        //public static string GetPovUri(string id)
+        //{
+        //    if (id == null) { return null; }
+        //    if (id == "{}" || id == "") { return null; }
+
+        //    string resp = HubCache.Get($@"http://localhost:3000/api/v1/player_perspectives/{id}");
+
+        //    if (resp == null || resp == "")
+        //    {
+        //        return "";
+        //    }
+
+        //    JObject JMetaInfo = (JObject)JsonConvert.DeserializeObject(resp);
+
+        //    bool arrayExists = JMetaInfo["player_perspectives"] != null;
+
+        //    if (arrayExists)
+        //    {
+        //        var test = JMetaInfo["player_perspectives"];
+        //        var sub = test[0]["player_perspectives"];
+
+        //        foreach (var t in sub)
+        //        {                
+        //            string genre = t["name"].ToString();
+        //            if(genre == "Virtual Reality")
+        //            {
+        //                continue;
+        //            }
+
+        //            if (!gameGenres.Any(g => g == genre))
+        //            {
+        //                gameGenres.Add(genre);
+        //                //Console.WriteLine(t["name"]);
+        //            }
+        //        }
+        //    }
+
+        //    return resp;
+        //}
     }
 }

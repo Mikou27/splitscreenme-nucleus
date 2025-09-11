@@ -110,7 +110,7 @@ namespace Nucleus.Gaming.Controls.SetupScreen
 
                         if (App_Misc.VGMOnly)
                         {
-                            if (!joystick.VendorId.ToString().StartsWith("202"))
+                            if (/*!joystick.VendorId.ToString().StartsWith("202") ||*/ (!joystick.VendorId.ToString().StartsWith("202") && joystick.VendorId.ToString() != ("1356")))
                             {
                                 continue;
                             }
@@ -171,7 +171,7 @@ namespace Nucleus.Gaming.Controls.SetupScreen
                                 CapabilitiesEx cap;
                                 OpenXinputController.XInputGetCapabilitiesEx((uint)1, (uint)i, 1, out cap);
 
-                                if (!cap.VendorId.ToString().StartsWith("202"))
+                                if (!cap.VendorId.ToString().StartsWith("202") /*|| (!cap.VendorId.ToString().StartsWith("202") && cap.VendorId.ToString() != ("1356"))*/)
                                 {
                                     continue;
                                 }
@@ -229,7 +229,7 @@ namespace Nucleus.Gaming.Controls.SetupScreen
                         {
                             int vid = SDL2.JoystickGetDeviceVendor(i);
 
-                            if (!vid.ToString().StartsWith("202"))
+                            if (/*!vid.ToString().StartsWith("202") || */(!vid.ToString().StartsWith("202") && vid.ToString() != ("1356")))//"1356" == dualshock4 (Sony vid)
                             {
                                 continue;
                             }

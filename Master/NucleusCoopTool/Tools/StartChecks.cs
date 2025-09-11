@@ -251,7 +251,8 @@ namespace Nucleus.Coop
             bool problematic = exePath.StartsWith(@"C:\Program Files\".ToLower()) ||
                                exePath.StartsWith(@"C:\Program Files (x86)\".ToLower()) ||
                                exePath.StartsWith(@"C:\Users\".ToLower()) ||
-                               exePath.StartsWith(@"C:\Windows\".ToLower());
+                               exePath.StartsWith(@"C:\Windows\".ToLower()) || 
+                               exePath.Contains(@"onedrive");
 
 
 
