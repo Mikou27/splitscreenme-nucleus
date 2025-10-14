@@ -538,7 +538,6 @@ namespace Nucleus.Gaming.Tools.Steam
                     }
 
                     Directory.CreateDirectory(instanceSteamSettingsFolder);
-                    //Directory.CreateDirectory(instanceSteam_SettingsFolder);
 
                     if (setupDll)
                     {

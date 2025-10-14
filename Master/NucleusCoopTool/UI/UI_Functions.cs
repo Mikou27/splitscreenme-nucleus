@@ -277,7 +277,7 @@ namespace Nucleus.Coop.UI
             if (!UI_Interface.HandlerNotesZoom.Visible)
             {
                 UI_Interface.HandlerNotesZoom.Warning.Visible = Core_Interface.Current_GenericGameInfo.MetaInfo.FirstLaunch;
-                UI_Interface.HandlerNotesZoom.TextBox.Text = Core_Interface.Current_GenericGameInfo.Description;
+                UI_Interface.HandlerNotesZoom.TextBox.Rtf = UI_Interface.HandlerNotes.Rtf;
                 UI_Interface.HandlerNotesZoom.Visible = true;
                 UI_Interface.HandlerNotesZoom.BringToFront();
             }
@@ -298,14 +298,16 @@ namespace Nucleus.Coop.UI
             {
                 UI_Interface.HandlerNotesZoom.Warning.Visible = true;
                 UI_Interface.HandlerNotesZoom.Warning.Text = "⚠ Important! Launch the game out of Nucleus before launching the handler for the first time. ⚠";
-                UI_Interface.HandlerNotesZoom.Notes.Text = Core_Interface.Current_GenericGameInfo.Description;
-                UI_Interface.HandlerNotesZoom.Notes.Rtf = UI_Interface.HandlerNotes.Rtf;
+                //UI_Interface.HandlerNotesZoom.Notes.Text = Core_Interface.Current_GenericGameInfo.Description;
+                //UI_Interface.HandlerNotesZoom.Notes.Rtf = UI_Interface.HandlerNotes.Rtf;
+                UI_Interface.HandlerNotesZoom.TextBox.Rtf = UI_Interface.HandlerNotes.Rtf;
                 UI_Interface.HandlerNotesZoom.Notes.Font = UI_Interface.HandlerNotesZoom.DefaultNotesFont;//Update the font after setting rtf
             }
             else
             {
-                UI_Interface.HandlerNotesZoom.Notes.Text = Core_Interface.Current_GenericGameInfo.Description;
-                UI_Interface.HandlerNotesZoom.Notes.Rtf = UI_Interface.HandlerNotes.Rtf;
+                //UI_Interface.HandlerNotesZoom.Notes.Text = Core_Interface.Current_GenericGameInfo.Description;
+                //UI_Interface.HandlerNotesZoom.Notes.Rtf = UI_Interface.HandlerNotes.Rtf;
+                UI_Interface.HandlerNotesZoom.TextBox.Rtf = UI_Interface.HandlerNotes.Rtf;
                 UI_Interface.HandlerNotesZoom.Notes.Font = UI_Interface.HandlerNotesZoom.DefaultNotesFont;//Upate the font after setting rtf
                 UI_Interface.HandlerNotesZoom.Warning.Visible = false;
             }
