@@ -2121,7 +2121,7 @@ namespace Nucleus.Gaming
                                 ProcessUtil.STARTUPINFO startup = new ProcessUtil.STARTUPINFO();
                                 startup.cb = Marshal.SizeOf(startup);
 
-                                bool success = ProcessUtil.CreateProcess(null, exePath + " " + startArgs, IntPtr.Zero, IntPtr.Zero, false, (uint)ProcessUtil.ProcessCreationFlags.CREATE_UNICODE_ENVIRONMENT, envPtr, Path.GetDirectoryName(exePath), ref startup, out ProcessUtil.PROCESS_INFORMATION processInformation);
+                                bool success = ProcessUtil.CreateProcess(null, $"\"{exePath}\" {startArgs}", IntPtr.Zero, IntPtr.Zero, false, (uint)ProcessUtil.ProcessCreationFlags.CREATE_UNICODE_ENVIRONMENT, envPtr, Path.GetDirectoryName(exePath), ref startup, out ProcessUtil.PROCESS_INFORMATION processInformation);
                                 Log(string.Format("Launching game directly at {0} with args {1}", exePath, startArgs));
 
                                 if (!success)
