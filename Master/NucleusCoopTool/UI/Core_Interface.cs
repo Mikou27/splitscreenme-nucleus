@@ -204,6 +204,7 @@ namespace Nucleus.Coop.UI
                     //Add search field controls first because the hub button location is relative to their location
                     Runtime_Controls.Insert_SearchFieldControls();
                     Runtime_Controls.Insert_HubButton();
+                    Runtime_Controls.Insert_RefreshHandlersButton();
                 }
 
                 UI_Interface.GameList.Visible = true;
@@ -585,11 +586,10 @@ namespace Nucleus.Coop.UI
 
         public static void RefreshHandlers()
         {
-            GameManager = new GameManager();
-       
+            GameManager = new GameManager();     
             SortGameFunction.SortGames(UI_Interface.SortOptionsPanel.SortGamesOptions);
-
             UI_Functions.RefreshUI(true);
+            Globals.MainOSD.Show(1000, "Game Handlers Refreshed");
         }
 
         public static void TriggerSearchTool()

@@ -440,6 +440,11 @@ namespace Nucleus.Coop.UI
             {
                 UI_Interface.SearchTextBox.Visible = Core_Interface.GameManager?.User.Games.Count >= 2;
             }
+
+            if (UI_Interface.RefreshHandlersBtn != null)
+            {
+                UI_Interface.RefreshHandlersBtn.Visible = Core_Interface.GameManager?.User.Games.Count >= 1;
+            }
         }
 
         public static void ResetPlayButton()
@@ -470,7 +475,12 @@ namespace Nucleus.Coop.UI
             }
         }
 
-        public static void ExtrtactHandlerDragDrop(object sender, DragEventArgs e)
+        public static void RefreshHandlersBtn_Click(object sender, EventArgs e)
+        {
+            Core_Interface.RefreshHandlers();
+        }
+
+        public static void ExtractHandlerDragDrop(object sender, DragEventArgs e)
         {
             try
             {

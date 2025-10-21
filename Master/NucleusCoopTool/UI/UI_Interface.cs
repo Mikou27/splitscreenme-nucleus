@@ -86,7 +86,7 @@ namespace Nucleus.Coop.UI
 
                 homeScreen.AllowDrop = true;
                 homeScreen.DragEnter += UI_Functions.ExtrtactHandlerDragEnter;
-                homeScreen.DragDrop += UI_Functions.ExtrtactHandlerDragDrop;
+                homeScreen.DragDrop += UI_Functions.ExtractHandlerDragDrop;
                 homeScreen.Paint += UI_Graphics.HomeScreen_Paint;
             }
         }
@@ -631,6 +631,26 @@ namespace Nucleus.Coop.UI
             set
             {            
                 hubButton = value;
+            }
+        }
+
+        private static PictureBox refreshHandlersBtn;
+        public static PictureBox RefreshHandlersBtn
+        {
+            get => refreshHandlersBtn;
+            set
+            {
+                refreshHandlersBtn = value;
+                refreshHandlersBtn.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "refresh.png");
+                refreshHandlersBtn.BackgroundImageLayout = ImageLayout.Stretch;
+                refreshHandlersBtn.BackColor = Color.Transparent;
+                refreshHandlersBtn.Cursor = Theme_Settings.Hand_Cursor;
+                refreshHandlersBtn.MouseEnter += Generic_Functions.Btn_ZoomIn;
+                refreshHandlersBtn.MouseLeave += Generic_Functions.Btn_ZoomOut;
+                refreshHandlersBtn.Visible = Core_Interface.GameManager?.User.Games.Count >= 1;
+                
+                CustomToolTips.SetToolTip(refreshHandlersBtn, "Refresh Handlers", "refreshHandlersBtn", new int[] { 190, 0, 0, 0 }, new int[] { 255, 255, 255, 255 });
+                refreshHandlersBtn.Click += UI_Functions.RefreshHandlersBtn_Click;
             }
         }
 

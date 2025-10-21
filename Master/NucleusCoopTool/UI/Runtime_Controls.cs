@@ -86,31 +86,25 @@ namespace Nucleus.Coop.UI
 
         public static void Insert_HubButton()
         {
-            UI_Interface.HubButton = new HubButton(UI_Interface.GameListContainer.Width, UI_Interface.GameList.Controls[0].Height);
+            UI_Interface.HubButton = new HubButton((UI_Interface.GameListContainer.Width - 5) - (UI_Interface.GameList.Controls[0].Height/2), UI_Interface.GameList.Controls[0].Height);
             UI_Interface.GameListContainer.Controls.Add(UI_Interface.HubButton);
             UI_Interface.GameList.Height -= UI_Interface.HubButton.Height;
             UI_Interface.HubButton.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             UI_Interface.HubButton.Location = new Point(0, UI_Interface.SearchTextBox.Bottom);
-
-           // UI_Interface.GameListContainer.Controls.Add(UI_Interface.MainButtonsPanel);
-            //UI_Interface.MainButtonsPanel.Location = new Point(UI_Interface.HubButton.Left, UI_Interface.HubButton.Bottom -10);
-            //UI_Interface.MainButtonsPanel.Visible = true;
-           
-            //UI_Interface.WindowPanel.Controls.Remove(UI_Interface.MainButtonsPanel);
-            //UI_Interface.SearchGameButton = new SearchGameButton(UI_Interface.HubButton.Width, UI_Interface.HubButton.Height);
-            //UI_Interface.GameListContainer.Controls.Add(UI_Interface.SearchGameButton);
-            //UI_Interface.GameList.Height -= UI_Interface.SearchGameButton.Height;
-            //UI_Interface.SearchGameButton.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-            //UI_Interface.SearchGameButton.Location = new Point(UI_Interface.HubButton.Left, UI_Interface.HubButton.Bottom);
-            ////
-            //UI_Interface.ExtractHandlerButton = new ExtractButton(UI_Interface.HubButton.Width, UI_Interface.HubButton.Height);
-            //UI_Interface.GameListContainer.Controls.Add(UI_Interface.ExtractHandlerButton);
-            //UI_Interface.GameList.Height -= UI_Interface.ExtractHandlerButton.Height;
-            //UI_Interface.ExtractHandlerButton.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-            //UI_Interface.ExtractHandlerButton.Location = new Point(UI_Interface.HubButton.Left, UI_Interface.SearchGameButton.Bottom);
-            //
             UI_Interface.GameList.Top = UI_Interface.HubButton.Bottom;
         }
 
+
+        public static void Insert_RefreshHandlersButton()
+        {
+            int size = (UI_Interface.HubButton.Height/2) - 4;
+
+            PictureBox rhb = new PictureBox();
+            rhb.Size = new Size(size, size);
+            rhb.Location = new Point((UI_Interface.GameListContainer.Right - size) - 5, UI_Interface.HubButton.Top + ((UI_Interface.HubButton.Height/2) - (size/2)));
+            rhb.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            UI_Interface.GameListContainer.Controls.Add(rhb);
+            UI_Interface.RefreshHandlersBtn = rhb;
+        }
     }
 }
