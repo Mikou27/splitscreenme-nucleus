@@ -69,6 +69,7 @@ namespace Nucleus.Gaming
         public bool SendFakeFocusMsg;
         public bool SplitDivCompatibility = true;
         public bool SetTopMostAtEnd;
+        public bool ForwardWindowToProtoInput;
         public bool Favorite;
 
         public void AddOption(string name, string desc, string key, object value, object defaultValue)

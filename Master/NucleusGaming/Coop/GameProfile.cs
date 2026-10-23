@@ -191,6 +191,7 @@ namespace Nucleus.Gaming.Coop
             set => useNicknames = value;
         }
 
+
         private static bool audioDefaultSettings;
         public static bool AudioDefaultSettings
         {

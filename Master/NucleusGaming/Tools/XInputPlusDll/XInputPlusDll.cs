@@ -12,7 +12,7 @@ namespace Nucleus.Gaming.Tools.XInputPlusDll
     public static class XInputPlusDll
     {
 
-        public static void SetupXInputPlusDll(PlayerInfo player, int i, bool setupDll)
+        public static void SetupXInputPlusDll(PlayerInfo player, int i, bool setupDll, bool block)
         {
             var handlerInstance = GenericGameHandler.Instance;
 
@@ -23,6 +23,7 @@ namespace Nucleus.Gaming.Tools.XInputPlusDll
             {
                 utilFolder = Path.Combine(Globals.NucleusInstallRoot, "utils\\XInputPlus\\old");
             }
+
 
             if (setupDll)
             {
@@ -82,7 +83,7 @@ namespace Nucleus.Gaming.Tools.XInputPlusDll
 
                     textChanges.Add(handlerInstance.Context.FindLineNumberInTextFile(Path.Combine(handlerInstance.instanceExeFolder, "XInputPlus.ini"), "FileVersion=", SearchType.StartsWith) + "|FileVersion=" + handlerInstance.garch);
 
-                    if (player.IsController)
+                    if (player.IsController && !block)
                     {
                         if (handlerInstance.CurrentGameInfo.PlayersPerInstance > 1 && handlerInstance.profile.DevicesList.Any(pl => pl.InstanceGuests.Count > 0 ))
                         {
@@ -116,10 +117,14 @@ namespace Nucleus.Gaming.Tools.XInputPlusDll
                         {
                             textChanges.Add(handlerInstance.Context.FindLineNumberInTextFile(Path.Combine(handlerInstance.instanceExeFolder, "XInputPlus.ini"), "Controller1=", SearchType.StartsWith) + "|Controller1=" + (player.GamepadId + 1));
                         }
+
                     }
                     else
                     {
-                        handlerInstance.Log("Skipping setting controller value for this instance, as this player is using keyboard");
+                        if (block)
+                            handlerInstance.Log("Skipping setting controller value for this instance, as this player is using TranslateXtoMKB");
+                        else 
+                            handlerInstance.Log("Skipping setting controller value for this instance, as this player is using keyboard");
                         handlerInstance.kbi = 0;
                     }
 

@@ -368,6 +368,7 @@ namespace Nucleus.Coop.Forms
                 "Game.ProtoInput.RenameNamedPipes",
                 "Game.ProtoInput.XinputHook",
                 "Game.ProtoInput.UseOpenXinput",
+                "Game.ProtoInput.TranslateMKBtoXinput",
                 "Game.ProtoInput.UseDinputRedirection",
                 "Game.Hook.DInputEnabled",
                 "Game.Hook.DInputForceDisable",
