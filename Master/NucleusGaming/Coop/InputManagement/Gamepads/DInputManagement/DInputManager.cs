@@ -13,23 +13,10 @@ public static class DInputManager
 {
     private static DirectInput dinput;
 
-    private static readonly object listLock = new object();
     private static List<D_Joystick> d_joysticksList = new List<D_Joystick>();
     private static IList<DeviceInstance> devicesList = new List<DeviceInstance>();
-    private static volatile bool refreshInProgress;
 
-    public static List<D_Joystick> D_JoysticksList
-    {
-        get
-        {
-            lock (listLock)
-            {
-                return d_joysticksList.AsReadOnly().ToList();
-            }
-        }
-    }
-
-    public static bool RefreshInProgress => refreshInProgress;
+    public static List<D_Joystick> D_JoysticksList => d_joysticksList.AsReadOnly().ToList();
 
     private static bool INITIALIZED;
 
@@ -41,7 +28,6 @@ public static class DInputManager
         }
 
         dinput = new DirectInput();
-        refreshInProgress = true;
 
         Thread di_Loop = new Thread(() => WatchDevicesList());
         di_Loop.IsBackground = true;
@@ -51,17 +37,12 @@ public static class DInputManager
 
     public static void Refresh()
     {
-        refreshInProgress = true;
-
-        lock (listLock)
+        for (int i = 0; i < d_joysticksList.Count; i++)
         {
-            for (int i = 0; i < d_joysticksList.Count; i++)
-            {
-                d_joysticksList[i].Dispose();
-            }
-
-            d_joysticksList.Clear();
+            d_joysticksList[i].Dispose();        
         }
+
+        d_joysticksList.Clear();
 
         INITIALIZED = false;
 
@@ -71,37 +52,24 @@ public static class DInputManager
     private static void WatchDevicesList()
     {
         InitJoystickList();
-        refreshInProgress = false;
 
         while (INITIALIZED)
         {
            var watchList = dinput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly);
 
-            //Check for newly connected devices
+            // sCheck for newly connected devices
             for(int i = 0; i < watchList.Count; i++)
             {
                 var device = watchList[i];
 
                 if (dinput.IsDeviceAttached(device.InstanceGuid))
                 {
-                    bool missing;
-
-                    lock (listLock)
+                    if (d_joysticksList.All(d => d.InstanceGuid != device.InstanceGuid))
                     {
-                        missing = d_joysticksList.All(d => d.InstanceGuid != device.InstanceGuid);
-                    }
-
-                    if (missing)
-                    {
-                        lock (listLock)
+                        foreach (D_Joystick joy in d_joysticksList)
                         {
-                            foreach (D_Joystick joy in d_joysticksList)
-                            {
-                                joy.Status = JoystickStatus.Disconnected;
-                            }
+                            joy.Status = JoystickStatus.Disconnected;
                         }
-
-                        refreshInProgress = true;
 
                         UIThread.Post(() =>
                         {
@@ -119,12 +87,7 @@ public static class DInputManager
                 var device = devicesList[i];
                 if (!dinput.IsDeviceAttached(device.InstanceGuid))
                 {
-                    D_Joystick d_Joystick;
-
-                    lock (listLock)
-                    {
-                        d_Joystick = d_joysticksList.FirstOrDefault(d_j => d_j.Device_Guid == device.InstanceGuid);
-                    }
+                    var d_Joystick = d_joysticksList.FirstOrDefault(d_j => d_j.Device_Guid == device.InstanceGuid);
 
                     if (d_Joystick != null)
                     {
@@ -148,24 +111,17 @@ public static class DInputManager
     {
         var devices = dinput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly);
 
-        lock (listLock)
+        for (int i = 0; i < devices.Count; i++)
         {
-            for (int i = 0; i < devices.Count; i++)
-            {
-                devicesList.Add(devices[i]);
-                d_joysticksList.Add(MakeNewJoystick(devices[i]));
-            }
+            devicesList.Add(devices[i]);
+            d_joysticksList.Add(MakeNewJoystick(devices[i]));
         }
     }
 
     private static void DeleteJoystick(D_Joystick d_Joystick)
     {
-        lock (listLock)
-        {
-            d_Joystick.Status = JoystickStatus.Disconnected;
-            d_joysticksList.Remove(d_Joystick);
-        }
-
+        d_Joystick.Status = JoystickStatus.Disconnected;
+        d_joysticksList.Remove(d_Joystick);
         d_Joystick.Joystick.Dispose();
         d_Joystick.Dispose();
     }

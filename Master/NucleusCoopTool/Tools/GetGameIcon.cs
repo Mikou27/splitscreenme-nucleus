@@ -69,9 +69,9 @@ namespace Nucleus.Coop.Tools
                 bmp = ImageCache.GetImage(Path.Combine(Directory.GetCurrentDirectory() + "\\gui\\icons\\default.png"));
             }
 
-            UIThread.Post(() => { 
-                game.Icon = bmp; gameControl.Image = bmp; 
-            });
+            game.Icon = bmp;
+
+            gameControl.Image = game.Icon;
         }
     }
 }

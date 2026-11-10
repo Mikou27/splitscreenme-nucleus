@@ -29,10 +29,10 @@ namespace Nucleus.Coop.Tools
                 return;
             }
 
+            Image coverBmp = null;
+
             string coverDir = Path.Combine(Application.StartupPath, $"gui\\covers");
             string backgroundsDir = Path.Combine(Application.StartupPath, $"gui\\screenshots");
-
-            var prevCoverImg = UI_Interface.Cover?.BackgroundImage;
 
             if (Directory.Exists(coverDir))
             {
@@ -46,24 +46,18 @@ namespace Nucleus.Coop.Tools
 
                 if (coversPath.Count > 0)
                 {
-                    using (var tmp = new Bitmap(coversPath[0]))
-                    {
-                        UI_Interface.Cover.BackgroundImage = new Bitmap(tmp); 
-                    }
+                    coverBmp = new Bitmap(coversPath[0]);
                 }
                 else
                 {
-                    UI_Interface.Cover.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "no_cover.png");
+                    coverBmp = ImageCache.GetImage(Globals.ThemeFolder + "no_cover.png");
                 }
+
+                UI_Interface.Cover.BackgroundImage = coverBmp;
             }
             else
             {
-                UI_Interface.Cover.BackgroundImage = ImageCache.GetImage(Globals.ThemeFolder + "no_cover.png");
-            }
-
-            if(ImageCache.GetImage(Globals.ThemeFolder + "no_cover.png") != prevCoverImg)//not the cached default image
-            {
-                prevCoverImg?.Dispose();
+                coverBmp = ImageCache.GetImage(Globals.ThemeFolder + "no_cover.png");
             }
 
             if (!Theme_Settings.UseBackgroundImage)
@@ -72,7 +66,6 @@ namespace Nucleus.Coop.Tools
             }
                 ///Apply screenshots randomly
             string gameBackgroundDir = Path.Combine(backgroundsDir, gameGUID);
-            var prevBGImg = UI_Graphics.BackgroundImg;
 
             if (Directory.Exists(gameBackgroundDir))
             {
@@ -89,28 +82,23 @@ namespace Nucleus.Coop.Tools
                     Random rNum = new Random();
                     int RandomIndex = rNum.Next(0, imgsPath.Count);
 
-                    var randomBG = new Bitmap(imgsPath[RandomIndex]);
-                    Bitmap backgroundImg = UI_Graphics.ApplyBlur(randomBG);
-                    randomBG.Dispose();
-
+                    Bitmap backgroundImg = UI_Graphics.ApplyBlur(new Bitmap(imgsPath[RandomIndex]));
                     UI_Graphics.BackgroundImg = backgroundImg;
                 }
                 else
                 {
-                    var defBGClone = new Bitmap((Bitmap)UI_Graphics.DefaultBackground.Clone());
-                    Bitmap def = UI_Graphics.ApplyBlur(defBGClone);
-                    defBGClone.Dispose();
-
-                    UI_Graphics.BackgroundImg = def;       
+                    Bitmap def = UI_Graphics.ApplyBlur(new Bitmap((Bitmap)UI_Graphics.DefaultBackground.Clone()));
+                    UI_Graphics.BackgroundImg = def;
+                    UI_Graphics.GameBorderGradientTop = Theme_Settings.DefaultBorderGradientColor;
+                    UI_Graphics.GameBorderGradientBottom = Theme_Settings.DefaultBorderGradientColor;
                 }
             }
             else
             {
-                var defaultBG = new Bitmap((Bitmap)UI_Graphics.DefaultBackground.Clone());
-                Bitmap def = UI_Graphics.ApplyBlur(defaultBG);
-                defaultBG.Dispose();
-
-                UI_Graphics.BackgroundImg = def;         
+                Bitmap def = UI_Graphics.ApplyBlur(new Bitmap((Bitmap)UI_Graphics.DefaultBackground.Clone()));
+                UI_Graphics.BackgroundImg = def;
+                UI_Graphics.GameBorderGradientTop = Theme_Settings.DefaultBorderGradientColor;
+                UI_Graphics.GameBorderGradientBottom = Theme_Settings.DefaultBorderGradientColor;
             }
 
             Generic_Functions.RefreshAll();
@@ -171,6 +159,7 @@ namespace Nucleus.Coop.Tools
                     File.Delete(file);
                 }
             }
+
         }
 
         public class AssetsDownloader

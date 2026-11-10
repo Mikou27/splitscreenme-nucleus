@@ -1,7 +1,6 @@
 ﻿using Ionic.Zip;
 using Microsoft.Win32;
 using Nucleus.Gaming.Coop;
-using Nucleus.Gaming.Coop.InputManagement.Logging;
 using Nucleus.Gaming.Tools;
 using Nucleus.Gaming.Tools.NemirtingasEpicEmu;
 using Nucleus.Gaming.Tools.NemirtingasGalaxyEmu;
@@ -490,8 +489,8 @@ namespace Nucleus.Gaming
                     Directory.CreateDirectory(contentDestination);
                 }
 
+                zip.ExtractAll(contentDestination);
                 zip.ExtractExistingFile = ExtractExistingFileAction.OverwriteSilently;
-                zip.ExtractAll(contentDestination);        
                 zip.Dispose();
             }
             else
@@ -600,39 +599,33 @@ namespace Nucleus.Gaming
             return true;
         }
 
-        private readonly object _randomLock = new object();
-        private static readonly Random _random = new Random();
-
         public int RandomInt(int min, int max)
         {
-            lock (_randomLock)
-            {
-                return _random.Next(min, max);
-            }
+            Random _random = new Random();
+            return _random.Next(min, max);
         }
 
         public string RandomString(int size, bool lowerCase = false)
         {
+            Random _random = new Random();
             StringBuilder builder = new StringBuilder(size);
-            lock (_randomLock)
+
+            // Unicode/ASCII Letters are divided into two blocks
+            // (Letters 65–90 / 97–122):
+            // The first group containing the uppercase letters and
+            // the second group containing the lowercase.  
+
+            // char is a single Unicode character  
+            char offset = lowerCase ? 'a' : 'A';
+            const int lettersOffset = 26; // A...Z or a..z: length=26  
+
+            for (int i = 0; i < size; i++)
             {
-                // Unicode/ASCII Letters are divided into two blocks
-                // (Letters 65–90 / 97–122):
-                // The first group containing the uppercase letters and
-                // the second group containing the lowercase.  
-
-                // char is a single Unicode character  
-                char offset = lowerCase ? 'a' : 'A';
-                const int lettersOffset = 26; // A...Z or a..z: length=26  
-
-                for (int i = 0; i < size; i++)
-                {
-                    char @char = (char)_random.Next(offset, offset + lettersOffset);
-                    builder.Append(@char);
-                }
-
-                return lowerCase ? builder.ToString().ToLower() : builder.ToString();
+                char @char = (char)_random.Next(offset, offset + lettersOffset);
+                builder.Append(@char);
             }
+
+            return lowerCase ? builder.ToString().ToLower() : builder.ToString();
         }
 
         public int ConvertToInt(string num)
@@ -1056,6 +1049,7 @@ namespace Nucleus.Gaming
             return files;
         }
 
+
         public string GetFileName(string fileFullPath)
         {
             //Log("File name = " + fileFullPath.Split('\\').Last());
@@ -1164,7 +1158,8 @@ namespace Nucleus.Gaming
             if (lineNum < 0 || lineNum > lines.Length)
             {
                 return;
-            }   
+            }
+            File.Delete(path);
             //}
             //else
             //{
@@ -1173,34 +1168,23 @@ namespace Nucleus.Gaming
             //    return;
             //}
 
-            List<string> newLines = new List<string>();
+            lines = lines.Where(w => w != lines[lineNum - 1]).ToArray();
 
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (i == lineNum)
-                {
-                    continue;
-                }
-
-                newLines.Add(lines[i]);
-            }
-
-            File.Delete(path);
-            //lines = lines.Where(w => w != lines[lineNum - 1]).ToArray();
-
-            File.WriteAllLines(path, newLines);
+            File.WriteAllLines(path, lines);
         }
 
         public void RemoveLineInTextFile(string path, int lineNum, string encoder)
         {
+            string[] lines;
             //if (File.Exists(path))
             //{
-            string[] lines = File.ReadAllLines(path, Encoding.GetEncoding(encoder));
-
+            lines = File.ReadAllLines(path, Encoding.GetEncoding(encoder));
             if (lineNum < 0 || lineNum > lines.Length)
             {
                 return;
             }
+
+            File.Delete(path);
             //}
             //else
             //{
@@ -1208,21 +1192,10 @@ namespace Nucleus.Gaming
             //    //MessageBox.Show($"File not found at : \n{path}\nStart the game out of Nucleus Co-op once in order to create the required file(s). ", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             //    return;
             //}
-            List<string> newLines = new List<string>();
 
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if(i == lineNum)
-                {
-                    continue;
-                }
+            lines = lines.Where(w => w != lines[lineNum - 1]).ToArray();
 
-                newLines.Add(lines[i]);
-            }
-
-            File.Delete(path);
-
-            File.WriteAllLines(path, newLines, Encoding.GetEncoding(encoder));
+            File.WriteAllLines(path, lines, Encoding.GetEncoding(encoder));
         }
 
         public bool RemoveLineInTextFile(string path, string searchValue, SearchType type)
@@ -2383,101 +2356,40 @@ namespace Nucleus.Gaming
 
         public bool MoveFolder(string sourceDirName, string destDirName)
         {
-            try
+            //if (!Directory.Exists(sourceDirName))
+            //{
+            //    MessageBox.Show($"Directory not found at : \n{sourceDirName}\nStart the game out of Nucleus Co-op once in order to create the required file(s). ", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+
+            string source = Folder.InstancedGameFolder.ToString() + "\\" + sourceDirName;
+            string dest = Folder.InstancedGameFolder.ToString() + "\\" + destDirName;
+
+            if (!Directory.Exists(dest))
             {
-                string root = GetFolder(Folder.InstancedGameFolder);
-
-                if (string.IsNullOrWhiteSpace(root))
+                Directory.Move(source, dest);
+            }
+            else
+            {
+                foreach (string dir in Directory.GetDirectories(source, "*", SearchOption.AllDirectories))
                 {
-                    Logger.WriteLine("[MoveFolder] Could not resolve the instanced game folder.");
-                    return false;
+                    Directory.CreateDirectory(Path.Combine(dest, dir.Substring(source.Length + 1)));
                 }
 
-                string source = Path.GetFullPath(Path.Combine(root, sourceDirName));
-                string dest = Path.GetFullPath(Path.Combine(root, destDirName));
-
-                string normalizedRoot = Path.GetFullPath(root)
-                    .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-
-                string rootPrefix = normalizedRoot + Path.DirectorySeparatorChar;
-
-                if (!source.StartsWith(rootPrefix, StringComparison.OrdinalIgnoreCase) ||
-                    !dest.StartsWith(rootPrefix, StringComparison.OrdinalIgnoreCase))
+                foreach (string file_name in Directory.GetFiles(source, "*", SearchOption.AllDirectories))
                 {
-                    Logger.WriteLine("[MoveFolder] Source and destination must be inside the instanced game folder.");
-                    return false;
-                }
-
-                if (!Directory.Exists(source))
-                {
-                    Logger.WriteLine("[MoveFolder] Source directory not found: " + source);
-                    return false;
-                }
-
-                if (string.Equals(source, dest, StringComparison.OrdinalIgnoreCase))
-                {
-                    Logger.WriteLine("[MoveFolder] Source and destination are the same directory: " + source);
-                    return false;
-                }
-
-                if (!Directory.Exists(dest))
-                {
-                    string parent = Path.GetDirectoryName(dest);
-
-                    if (!string.IsNullOrEmpty(parent))
-                    {
-                        Directory.CreateDirectory(parent);
-                    }
-
-                    Directory.Move(source, dest);
-                    return true;
-                }
-
-                foreach (string dir in Directory.GetDirectories(
-                    source, "*", SearchOption.AllDirectories))
-                {
-                    string relativePath = dir.Substring(source.Length + 1);
-                    Directory.CreateDirectory(Path.Combine(dest, relativePath));
-                }
-
-                foreach (string fileName in Directory.GetFiles(
-                    source, "*", SearchOption.AllDirectories))
-                {
-                    string relativePath = fileName.Substring(source.Length + 1);
-                    string destinationFile = Path.Combine(dest, relativePath);
-
                     try
                     {
-                        File.Copy(fileName, destinationFile);
+                        File.Copy(file_name, Path.Combine(dest, file_name.Substring(source.Length + 1)));
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        string destinationDirectory = Path.GetDirectoryName(destinationFile);
-
-                        CmdUtil.ExecuteCommand(
-                            destinationDirectory,
-                            out int exitCode,
-                            "copy \"" + fileName + "\" \"" + destinationFile + "\"",
-                            false);
-
-                        if (exitCode != 0)
-                        {
-                            Logger.WriteLine(
-                                "[MoveFolder] Failed to copy file: " + fileName +
-                                ". Error: " + ex.Message);
-
-                            return false;
-                        }
+                        CmdUtil.ExecuteCommand(Path.GetDirectoryName(Path.Combine(dest, file_name.Substring(source.Length + 1))), out int exitCode, "copy \"" + file_name + "\" \"" + Path.Combine(dest, file_name.Substring(source.Length + 1)) + "\"", false);
                     }
                 }
+            }
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLine("[MoveFolder] Failed: " + ex);
-                return false;
-            }
+            return true;
         }
     }
 }

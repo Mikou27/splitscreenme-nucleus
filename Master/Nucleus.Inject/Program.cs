@@ -320,15 +320,17 @@ namespace Nucleus.Inject
                         result = Injector32.RhCreateAndInject(InEXEPath, InCommandLine, InProcessCreationFlags, envPtr, InInjectionOptions, InLibraryPath_x86, "", ptr, (uint)size, pid);
                     }
 
-                    Log("CreateAndInject result code: " + result);
+                    Thread.Sleep(1000);
 
+                    Log("CreateAndInject result code: " + result);
                     if (result != 0)
                     {
                         Log("Attempt " + (attempts + 1) +
                             "/5 Failed to create process and inject start up hook dll. Result code: " + result);
-                        Thread.Sleep(1000);
                     }
                     //}
+
+                    Thread.Sleep(1000);
 
                     if (++attempts == maxAttempts)
                     {

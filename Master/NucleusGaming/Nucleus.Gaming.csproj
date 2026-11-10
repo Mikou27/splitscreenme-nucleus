@@ -57,6 +57,14 @@
     <DebugSymbols>true</DebugSymbols>
     <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestDebug|AnyCPU'">
+    <OutputPath>bin\TestDebug\</OutputPath>
+    <DefineConstants>UNSAFE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EasyHook">
       <HintPath>..\ThirdParty\easyhook\EasyHook.dll</HintPath>
@@ -247,7 +255,6 @@
     <Compile Include="Coop\InputManagement\Gamepads\GamepadShortcuts.cs" />
     <Compile Include="Coop\InputManagement\RawInputDeviceName.cs" />
     <Compile Include="Coop\GameMetaInfo.cs" />
-    <Compile Include="Coop\ProtoInput\ProtoInputEnumsOptions.cs" />
     <Compile Include="DPI\ThreadDPIContext.cs" />
     <Compile Include="Forms\NucleusMessageBox\CustomMessageBox.cs">
       <SubType>Form</SubType>

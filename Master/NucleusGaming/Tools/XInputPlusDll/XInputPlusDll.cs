@@ -24,7 +24,6 @@ namespace Nucleus.Gaming.Tools.XInputPlusDll
                 utilFolder = Path.Combine(Globals.NucleusInstallRoot, "utils\\XInputPlus\\old");
             }
 
-
             if (setupDll)
             {
                 foreach (string xinputDllName in handlerInstance.CurrentGameInfo.XInputPlusDll)
@@ -117,7 +116,6 @@ namespace Nucleus.Gaming.Tools.XInputPlusDll
                         {
                             textChanges.Add(handlerInstance.Context.FindLineNumberInTextFile(Path.Combine(handlerInstance.instanceExeFolder, "XInputPlus.ini"), "Controller1=", SearchType.StartsWith) + "|Controller1=" + (player.GamepadId + 1));
                         }
-
                     }
                     else
                     {

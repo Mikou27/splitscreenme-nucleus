@@ -218,6 +218,20 @@ namespace Nucleus.Gaming.UI
             }
         }
 
+        private static Color defaultBorderGradientColor;
+        public static Color DefaultBorderGradientColor
+        {
+            get
+            {
+                if (defaultBorderGradientColor.IsEmpty)
+                {
+                    defaultBorderGradientColor = ParseColor(ThemeConfigFile.IniReadValue("Colors", "WindowBorderGradient").Split(','));
+                }
+
+                return defaultBorderGradientColor;
+            }
+        }
+
         private static Color mainWindowBackColor;
         public static Color MainWindowBackColor
         {
